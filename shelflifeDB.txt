@@ -1,0 +1,53 @@
+﻿CREATE TABLE USERS(
+USER_ID INT PRIMARY KEY,                         
+Name VARCHAR(50),                                                               
+Restaurant_Id INT,                                                             
+User_Name VARCHAR(50),                                                          
+User_Password VARCHAR(50)                                                       
+);
+
+
+CREATE TABLE DISHES(
+Dish_ID INT PRIMARY KEY,
+Dish_Cost FLOAT,
+);
+
+
+CREATE TABLE ORDERS(
+Order_ID INT PRIMARY KEY,
+USER_ID INT,
+Date TIMESTAMP UNIQUE,
+Dish_ID INT,
+FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID)
+FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID),
+);
+
+
+
+
+CREATE TABLE Inventory (
+  Ingredient_ID int NOT NULL PRIMARY KEY,
+  Ingredient_Group_ID int NOT NULL,
+  Ingredient_Quantity int,
+  Ingredient_Cost float,
+  Ingredient_Unit int
+);
+
+
+
+
+CREATE TABLE Dish_2_Ingredients(
+  Dish_ID int,
+  Ingredient_ID int,
+  Ingredient_Quanity int,
+  Dish_Name varchar(50),
+  FOREIGN KEY (Ingredient_ID) REFERENCES Inventory(Ingredient_ID),
+  FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
+);
+CREATE TABLE Sales(
+Order_ID INT,
+Dish_ID INT,
+Date TIMESTAMP,
+Cost FLOAT,
+FOREIGN KEY(Date) REFERENCES ORDERS(Date)
+);
