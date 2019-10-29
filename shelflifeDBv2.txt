@@ -1,0 +1,68 @@
+//1. input each table in order
+//2. input scripts to tables 
+//Note: change paths in scripts to your computer
+
+
+CREATE TABLE USERS(
+USER_ID INT PRIMARY KEY,                         
+Name VARCHAR(50),                                                               
+Restaurant_Id INT,                                                             
+User_Name VARCHAR(50),                                                          
+User_Password VARCHAR(50)                                                       
+);
+
+///////// SCRIPT TO READ DISH_INVENTORY////////////////
+--shelflife=# COPY dishes(Dish_ID, Dish_Name, Dish_Cost
+) FROM '/Users/maurovargas/Documents/SHELFLIFE/Dish_InventoryFile.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE TABLE DISHES(
+Dish_ID INT PRIMARY KEY,
+Dish_Name varchar(50),
+Dish_Cost FLOAT
+);
+
+
+CREATE TABLE ORDERS(
+Order_ID INT PRIMARY KEY,
+USER_ID INT,
+Date TIMESTAMP UNIQUE,
+Dish_ID INT,
+FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
+FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
+);
+
+///////// SCRIPT TO READ INVENTORY FILE ////////////////
+--shelflife=# COPY Inventory(Ingredient_ID, Ingredient_Group_ID, Ingredient_Name
+, Ingredient_Quantity, Ingredient_Cost, Ingredient_Unit) FROM '/Users/maurovargas/Documents/SHELFLIFE/inventoryFile.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE TABLE Inventory (
+  Ingredient_ID int NOT NULL PRIMARY KEY,
+  Ingredient_Group_ID int NOT NULL,
+  Ingredient_Name varchar(50),
+  Ingredient_Quantity int,
+  Ingredient_Cost float,
+  Ingredient_Unit varchar(50)
+);
+
+///////// SCRIPT TO READ DISH_2_INGREDIENTSFILE ////////////////
+--shelflife=# COPY Dish_2_Ingredients(Dish_ID, Ingredient_ID, Ingredient_Quanity
+) FROM '/Users/maurovargas/Documents/SHELFLIFE/Dish_2_IngredientsFile.csv' DELIMITER ',' CSV HEADER;
+
+
+CREATE TABLE Dish_2_Ingredients(
+  Dish_ID int,
+  Ingredient_ID int,
+  Ingredient_Quanity float,
+  FOREIGN KEY (Ingredient_ID) REFERENCES Inventory(Ingredient_ID),
+  FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
+);
+
+CREATE TABLE Sales(
+Order_ID INT,
+Dish_ID INT,
+Date TIMESTAMP,
+Cost FLOAT,
+FOREIGN KEY(Date) REFERENCES ORDERS(Date)
+);
