@@ -4,11 +4,13 @@
 
 
 CREATE TABLE USERS(
-USER_ID INT PRIMARY KEY,                         
+Restaurant_Id INT PRIMARY KEY,   
 Name VARCHAR(50),                                                               
-Restaurant_Id INT,                                                             
-User_Name VARCHAR(50),                                                          
-User_Password VARCHAR(50)                                                       
+Phone VARCHAR(50),
+Address_line_1 VARCHAR(50),
+Address_line_2 VARCHAR(50),                                                       
+User_Name VARCHAR(50),  
+User_Password VARCHAR(50)  
 );
 
 ///////// SCRIPT TO READ DISH_INVENTORY////////////////
@@ -28,7 +30,6 @@ Order_ID INT PRIMARY KEY,
 USER_ID INT,
 Date TIMESTAMP UNIQUE,
 Dish_ID INT,
-FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
 FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
 );
 
