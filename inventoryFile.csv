@@ -1,0 +1,9 @@
+Ingredient_Group_ID,Ingredient_Name,Ingredient_Quantity,Ingredient_Cost,Ingredient_Unit
+1,ground_beef,10,3,Ib
+2,cheese,10,0.1,oz
+3,tomatoes,5,2,Ib
+4,ketchup,40,0.1,oz
+3,pickles,48,2,oz
+4,mayonnaise,60,0.1,oz
+4,bbq_sauce,18,0.1,oz
+3,lettuce,12,0.1,oz
