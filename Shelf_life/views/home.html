@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Home</title>
+  <!--  Bootstrap + CSS    -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="../resources/css/my_styles.css" rel="stylesheet">
+  <script src="../resources/js/home_sales.js"></script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">
+      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="account.html">Account<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sales.html">Sales</a>
+        </li>
+        <li>
+          <a class="nav-link" href="inventory.html">Inventory</a>
+        </li>
+        <li>
+          <a class="nav-link" href="order_forms.html">Order Forms</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="login.html">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- end of nav bar -->
+
+
+  <div class="clearfix">
+    <div class="seperate">
+      <div class="jumbotron">
+        <h1 class="display-5">Today's Sales:</h1>
+        <div id="chartContainer" style="height: 300px; width: 100%;">
+        </div>
+      </div>
+    </div>
+    <div class="seperate">
+      <div class="jumbotron">
+        <h1 class="display-5">Inventory Warnings:</h1>
+        <p class="lead">  You have no warnings!</p>
+        <hr>
+
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="col-15">
+        <div class="jumbotron">
+          <h1 class="display-4">Menu</h1>
+          <p class="lead">If you are interested in learning about the best collegiate football team in the Rockies, then you've come to the right place.
+            Here you'll find the scores for the latest football season and the most up-to-date stats on our football players. To find out more information
+            about Ralphie and the Buff Football Team, head over </p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
