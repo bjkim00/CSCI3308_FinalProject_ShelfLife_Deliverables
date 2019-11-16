@@ -36,9 +36,6 @@ CREATE TABLE Inventory(
   Ingredient_Cost float,
   Ingredient_Unit varchar(50)
 );
-COPY Inventory(ingredient_id, ingredient_name, ingredient_quantity, ingredient_cost, ingredient_unit)
-FROM '/Users/maurovargas/Documents/SHELFLIFE/inventoryFile.csv' DELIMITER ',' CSV HEADER ;
-
 
 
 CREATE TABLE Dish_2_Ingredients(
