@@ -60,7 +60,7 @@ FOREIGN KEY(Date) REFERENCES ORDERS(Date)
 ///////// SCRIPT TO READ DISH_INVENTORY////////////////
 --shelflife=# COPY dishes FROM '/Users/maurovargas/Documents/SHELFLIFE/Dish_InventoryFile.csv' DELIMITER ',' CSV HEADER;
 
-///////// SCRIPT TO READ INVENTORY FILE ////////////////
+///////// SCRIPT TO READ INVENTORY FILE /////////////////
 --shelflife=# 
 COPY Inventory(ingredient_group_id, ingredient_name, ingredient_quantity, ingredient_cost, ingredient_unit)
 FROM '/Users/maurovargas/Documents/SHELFLIFE/inventoryFile.csv' DELIMITER ',' CSV HEADER ;
