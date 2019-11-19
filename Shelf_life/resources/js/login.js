@@ -26,9 +26,10 @@ var db=pg(dbConfig);
 
 
 app.get('/login', function(req, res) {
-    //res.sendFile('views/login.html', ,{root: __dirname }) //use your directory below 
-    res.sendFile('/Users/haleyhartin/Documents/ShelfLife/resources/views/login.html','/Users/haleyhartin/Documents/ShelfLife/resources/css/signin.css')
+    //res.sendFile('views/login.html', ,{root: __dirname })
+    res.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/login.html','/Users/haleyhartin/Documents/ShelfLife/resources/css/signin.css')
 		console.log('app.get');
+		console.log(req.action);
 });
 
 app.post('/auth', function(request, response) {
@@ -44,8 +45,8 @@ app.post('/auth', function(request, response) {
   			.then(function(results){
 						console.log(results.length);
 							if (results.length > 0) {
-									request.session.loggedin = true;
-									request.session.username = username;
+									//request.session.loggedin = true;
+									//request.session.username = username;
 									response.redirect('/home');
 						} else {
 								response.redirect('/login');
@@ -61,7 +62,21 @@ app.post('/auth', function(request, response) {
   }
 });
 
+app.post('/reg', function(request, response) {
+ console.log("redirect");
+ response.redirect('/register');
+ response.end();
+});
+
+app.get('/register', function(request, response) {
+  console.log("in register");
+	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/register.html')
+});
+
+app.get('/home', function(request, response) {
+	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html')
+});
+
 app.listen(3000);
 console.log('3000 is the magic port');
 
-//app.listen(3000);
