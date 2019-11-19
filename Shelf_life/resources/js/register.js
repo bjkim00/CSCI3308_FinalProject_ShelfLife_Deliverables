@@ -18,7 +18,7 @@ function menus() {
           <input type="number" class="form-control" name="numIngredients" id="numIngredients${i}" placeholder="e.g 4">
         </div>
           <div class="col-sm-1">
-            <button class="btn btn-primary btn-block" type="button" onclick="ingredients(${i})">Enter</button>
+            <button class="btn btn-primary btn-block" type="button" onclick="ingredients(${i}); this.onclick=null;">Enter</button>
           </div>
       </div>
       <div id="test${i}">
@@ -30,10 +30,9 @@ function menus() {
 
 function ingredients(id) {
   var numIngredients = document.getElementById('numIngredients' + id);
-  for (var k = 0; k < numItems.value; k++) {
-    for (var j = 0; j < numIngredients.value; j++) {
-      document.getElementById(`test${k}`).innerHTML +=
-        `
+  for (var j = 0; j < numIngredients.value; j++) {
+    document.getElementById(`test${id}`).innerHTML +=
+      `
           <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Ingredient Name ${j+1}: </label>
             <div class="col-sm-2">
@@ -47,22 +46,16 @@ function ingredients(id) {
             <div class="col-sm-2">
               <input type="number" class="form-control" name="ingCost${j}" id="ingCost${j}" placeholder="e.g $0.9">
             </div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Unit
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Whole Item</a>
-                <a class="dropdown-item" href="#">lbs</a>
-                <a class="dropdown-item" href="#">Gallons</a>
-                <a class="dropdown-item" href="#">Oz</a>
-                <a class="dropdown-item" href="#">grams</a>
-                <a class="dropdown-item" href="#">tb spoons</a>
-                <a class="dropdown-item" href="#">fl Oz</a>
-              </div>
-            </div>
+            <select name="pets" id="pet-select">
+              <option value=""> Unit </option>
+              <option value="dog">Whole Item(s)</option>
+              <option value="cat">lbs</option>
+              <option value="hamster">Oz</option>
+              <option value="parrot">Gallons</option>
+              <option value="spider">tb spoon(s)</option>
+              <option value="goldfish">Fl Oz</option>
+            </select>
           </div>
         `;
-    }
   }
 }
