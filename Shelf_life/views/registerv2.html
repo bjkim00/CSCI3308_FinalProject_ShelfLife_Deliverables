@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="/Users/maurovargas/Documents/CSCI3308/node-api-postgres/resources/css/signin.css" rel="stylesheet">
+  <script src="/Users/maurovargas/Documents/CSCI3308/node-api-postgres/resources/js/index.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <br><br><br><br><br><br><br><br>
+    <div class="center">
+      <a href="home.html">
+      <img class="rounded-circle center" src="../resources/img/logo.jpg" alt="LOGO" width="248" height="90">
+      </a>
+      <hr>
+      <h1 class="textcenter">Create Account</h1>
+      <br>
+    </div>
+    <form action = "/users" method = "POST">    <!-- /users is a web folder to get to register.html to add the new users into the database -->
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="User_Name">User Name:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="User_Name" id="User_Name" placeholder="Enter User Name">
+        </div>
+        <label class="col-sm-2 col-form-label" for="User_Password">Password:</label>
+        <div class="col-sm-3">
+          <input type="Password" class="form-control" name = "User_Password" id="User_Password" placeholder="Cheeseburger">
+        </div>
+        <div class="col-sm-2">
+          <input type="checkbox" onclick="showPass()"> Show Password
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Restaurant_Name">Restaurant Name:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="Restaurant_Name" id="Restaurant_Name" placeholder="Enter Restaurant Name">
+        </div>
+        <label class="col-sm-2 col-form-label" for="Phone">Phone Number:</label>
+        <div class="col-sm-3">
+          <input type="tel" class="form-control" name="Phone" id="Phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="(XXX)-XXX-XXXX">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Address_line_1">Address Line 1: </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="Address_line_1" id="Address_line_1" placeholder="St. Adress">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Address_line_2">Address Line 2: </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="Address_line_2" id="Address_line_2" placeholder="City, State, Zip code">
+        </div>
+      </div>
+      <br><br><br><br>
+      <input type="submit" value="Create Account" class="btn btn-primary btn-block">
+    </form>
+    <br>
+  </div>
+</body>
+
+</html>
