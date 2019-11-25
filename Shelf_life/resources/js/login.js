@@ -55,7 +55,7 @@ app.post('/auth', function(request, response) {
 				})
 				.catch(function(err){
  				console.log("error",err);
- 				})
+			})
 } else {
 	response.redirect('/login');
 	response.end();
@@ -71,8 +71,33 @@ app.post('/reg', function(request, response) {
 app.get('/register', function(request, response) {
   console.log("in register");
 	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/register.html')
-});
+	var _name = 'bob';
+	var _phone= '777-777-7777';
+	var _address1 = '6728 20th st';
+	var _address2 = 'Boulder CO';
+	var _username = 'Bob_smith@gmailcom';
+	var _password = 'abrhklg';
+  var newid = 0;
+	var count= "SELECT COUNT(*) FROM USERS;";
+	db.any(count)
+	.then(function(results){
+      console.log(results);
+			console.log("count: ", results[0].count);
+      newid=Number(results[0].count) + 1;
+			console.log("newid: ", newid);
+		})
 
+
+	//var newid= count+1;
+	var sql= "INSERT INTO USERS (Restaurant_Id, Name, Phone, Address_line_1, Address_line_2, User_Name, User_Password) VALUES ($1, $2, $3, $4, $5, $6, $7);";
+	db.any(sql, [newid, _name, _phone, _address1, _address2, _username, _password ] )
+			.then(function(results){
+				console.log(_name);
+			})
+			.catch(function(err){
+		console.log("cannot insert",err);
+	});
+});
 app.get('/home', function(request, response) {
 	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html')
 });
