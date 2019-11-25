@@ -5,13 +5,13 @@
 
 CREATE TABLE USERS
 (
-Restaurant_Id INT,   
-Name VARCHAR(50),                                                               
+Restaurant_Id INT, 
+User_Name VARCHAR(50),
+User_Password VARCHAR(50),   
+Restaurant_Name VARCHAR(50),                                                              
 Phone VARCHAR(50),
 Address_line_1 VARCHAR(50),
-Address_line_2 VARCHAR(50),                                                       
-User_Name VARCHAR(50),  
-User_Password VARCHAR(50)  
+Address_line_2 VARCHAR(50)                                                      
 );
 
 CREATE TABLE DISHES(
