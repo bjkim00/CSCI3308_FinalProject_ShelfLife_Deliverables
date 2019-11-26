@@ -43,5 +43,61 @@
         </div>
       </div>
     </nav>
+
+
+    <br>
+    <h1 align="center">Order Form</h1>
+    <br>
+    <table class="table table-striped">
+      <thead class="thead-dark" align="center">
+        <tr>
+          <th scope="col">Ingredient</th>
+          <th scope="col">Unit Cost</th>
+          <th scope="col">Amount In Stock</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Unit</th>
+          <th scope="col">Total Cost</th>
+        </tr>
+      </thead>
+      <tbody align="center">
+        <tr>
+          <th scope="row">Chicken</th>
+          <td>$0.50 / Oz</td>
+          <td>35</td>
+          <td>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" name="numIngredients" id="numIngredients${i}" placeholder="e.g 4">
+            </div>
+          </td>
+          <td>Oz</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Avocadoe</th>
+          <td>$0.24 / Whole Item</td>
+          <td>28</td>
+          <td>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" name="numIngredients" id="numIngredients${i}" placeholder="e.g 4">
+            </div>
+          </td>
+          <td>Whole Item(s)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Ranch</th>
+          <td>$2.00 / Gallon</td>
+          <td>9</td>
+          <td>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" name="numIngredients" id="numIngredients${i}" placeholder="e.g 4">
+            </div>
+          </td>
+          <td>Gallon(s)</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
   </body>
 </html>
