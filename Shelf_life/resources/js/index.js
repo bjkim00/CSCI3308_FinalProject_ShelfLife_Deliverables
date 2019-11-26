@@ -2,11 +2,11 @@ const http = require('http');
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const db = require('./queries');
+const dbb = require('./queries');
 const hostname = '127.0.0.1';
 const port = 3000
 const fs = require('fs');//read login file
-
+var pg=require('pg-promise')();
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -14,17 +14,27 @@ app.use(
   })
 )
 
+const dbConfig={
+	host: 'localhost',
+	port: 5431,  //probably 5432 for you
+	database: 'shalflife2',   //enter in your username password for pg
+	user: 'haleyhartin',
+	password:'abc123'
+};
+
+var db=pg(dbConfig);
 //create six functions for six routes
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
+app.get('/users', dbb.getUsers)
+app.get('/users/:id', dbb.getUserById)
+app.post('/users', dbb.createUser)
+app.put('/users/:id', dbb.updateUser)
+app.delete('/users/:id', dbb.deleteUser)
+
 
 
 app.get('/login', function(req, res) {
     //res.sendFile('views/login.html', ,{root: __dirname })
-    res.sendFile('/Users/maurovargas/Documents/CSCI3308/node-api-postgres/views/login.html','/Users/maurovargas/Documents/CSCI3308/node-api-postgres/resources/css/signin.css')
+    res.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/login.html','/Users/haleyhartin/Documents/ShelfLife/resources/css/signin.css')
 		console.log('app.get');
 		console.log(req.action);
 });
@@ -52,12 +62,14 @@ app.post('/auth', function(request, response) {
 				})
 				.catch(function(err){
  				console.log("error",err);
- 				})
+			})
 } else {
 	response.redirect('/login');
 	response.end();
   }
 });
+
+
 
 app.post('/reg', function(request, response) {
  console.log("redirect");
@@ -67,13 +79,15 @@ app.post('/reg', function(request, response) {
 
 app.get('/register', (request, response) => {
   console.log("in register");
-  response.sendFile('/Users/maurovargas/Documents/CSCI3308/node-api-postgres/views/register.html')
+  response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/register2.html')
 })
 
 app.get('/home', function(request, response) {
-	response.sendFile('/Users/maurovargas/Documents/CSCI3308/node-api-postgres/views/home.html')
+	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html')
 });
 
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(3000);
+console.log('3000 is the magic port');
+//app.listen(port, hostname, () => {
+//  console.log(`Server running at http://${hostname}:${port}/`);
+//});
