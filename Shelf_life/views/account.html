@@ -1,47 +1,113 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>Account</title>
 
-    <!--  Bootstrap + CSS    -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="../resources/css/my_style.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="home.html">
-        <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="home.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="account.html">Account<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sales.html">Sales</a>
-          </li>
-          <li>
-            <a class="nav-link" href="inventory.html">Inventory</a>
-          </li>
-          <li>
-            <a class="nav-link" href="order_forms.html">Order Forms</a>
-          </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <a href="login.html">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
-          </a>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Account</title>
+
+  <!--  Bootstrap + CSS    -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="../resources/css/my_style.css" rel="stylesheet">
+  <script src="../resources/js/menuItems.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">
+      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="account.html">Account<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sales.html">Sales</a>
+        </li>
+        <li>
+          <a class="nav-link" href="inventory.html">Inventory</a>
+        </li>
+        <li>
+          <a class="nav-link" href="order_forms.html">Order Forms</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="login.html">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        </a>
       </div>
-    </nav>
-  </body>
+    </div>
+  </nav>
+
+
+  <br><br>
+  <h1 align="center">Account Settings: </h1>
+  <br><br>
+  <form class="textcenter" action="TODO">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="UserName">User Name:</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="UserName" id="UserName" placeholder="Enter User Name">
+      </div>
+      <label class="col-sm-2 col-form-label" for="password">Password:</label>
+      <div class="col-sm-3">
+        <input type="Password" class="form-control" id="pass" placeholder="Cheeseburger">
+      </div>
+      <div class="col-sm-2">
+        <input type="checkbox" onclick="showPass()"> Show Password
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="RestaurantName">Restaurant Name:</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="RestaurantName" id="RestaurantName" placeholder="Enter Restaurant Name">
+      </div>
+      <label class="col-sm-2 col-form-label" for="emailAddress">Phone Number:</label>
+      <div class="col-sm-3">
+        <input type="tel" class="form-control" name="phone" id="number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="(XXX)-XXX-XXXX">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="address">Address Line 1: </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="address" id="address" placeholder="St. Adress">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="address2">Address Line 2: </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="address2" id="address2" placeholder="City, State, Zip code">
+      </div>
+    </div>
+    <!--    Menu Item input    -->
+
+    <div class="form-group row textcenter">
+      <label class="col-sm-2 col-form-label" for="menu"># of Menu Items: </label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" name="numItems" id="numItems" placeholder="e.g 12">
+      </div>
+      <div class="col-sm-1">
+      <button class="btn btn-primary btn-block" type="button" onclick="menus(); this.onclick=null;">Enter</button>
+      </div>
+    </div>
+
+
+
+    <div id="menuItem">
+
+    </div>
+    <!--   END Menu Item input    -->
+
+  </form>
+
+</body>
+
 </html>
