@@ -69,6 +69,28 @@ const deleteUser = (request, response) => {
   })
 }
 
+const updatePassword = (request, response) => {
+  const username = request.body.User_Name;
+  const newPassword = request.body.User_Password_New;
+  const currentPassword = request.body.User_Password;
+  console.log("Username", username);
+  console.log("New Password", newPassword);
+  console.log("Current Password", currentPassword);
+  pool.query(
+    'UPDATE users SET user_password = $3 WHERE user_name = $1 and user_password = $2',
+    [username, currentPassword, newPassword],
+    (error, results) => {
+      console.log(username);
+      console.log(currentPassword);
+      console.log(newPassword);
+      if (error) {
+        throw error
+      }
+      response.status(201).send(`User password modified with username: ${username}`)
+    }
+  )
+}
+
 module.exports = {
   getUsers,
   getUserById,
