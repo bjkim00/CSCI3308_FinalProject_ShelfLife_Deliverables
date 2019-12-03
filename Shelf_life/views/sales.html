@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<img id="jpg-export"></img>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <title>Sales</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!--  Bootstrap + CSS    -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="../resources/css/my_style.css" rel="stylesheet">
@@ -21,10 +22,10 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="home.html">Home</a>
+            <a class="nav-link" href="/work_home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="account.html">Account<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="restaurant.html">Restaurant<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="sales.html">Sales</a>
@@ -35,6 +36,9 @@
           <li>
             <a class="nav-link" href="order_forms.html">Order Forms</a>
           </li>
+          <li>
+            <a class="nav-link" href="/menu">Order Forms</a>
+          </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
           <a href="login.html">
@@ -43,5 +47,44 @@
         </div>
       </div>
     </nav>
-  </body>
+  <p> Total Sales: {{sales}}</p>
+  <canvas id="myChart" width="350" height="200"></canvas>
+
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: {{time}},
+        datasets: [{
+          data: {{chartData}},
+          borderColor: "#3e95cd",
+          fill:false
+    }]
+  },
+  options: {
+   title: {
+     display: true,
+     text: {{title}}
+   }
+ }
+  });
+</script>
+
+
+<form id="table" action="/table" method ="POST">
+       <select class="selectpicker" data-style="btn-info" name="selectpicker">
+           <optgroup label="Sales">
+             <option name="none" value='0'>Select Sales</option>
+             <option name="Today" value='1'>Today's Sales</option>
+             <option name="Week" value='2'>Week's Sales</option>
+             <option name="Month" value='3'>Month's Sales</option>
+             <option name="Year" value='4'>Year's Sales</option>
+           </optgroup>
+       </select>
+    <input type="submit"/>
+</form>
+</body>
+
 </html>
