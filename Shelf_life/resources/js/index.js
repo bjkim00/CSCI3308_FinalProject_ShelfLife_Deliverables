@@ -29,6 +29,7 @@ app.get('/users/:id', dbb.getUserById)
 app.post('/users', dbb.createUser)
 app.put('/users/:id', dbb.updateUser)
 app.delete('/users/:id', dbb.deleteUser)
+app.post('/settings', dbb.updatePassword)
 
 
 
@@ -84,6 +85,31 @@ app.get('/register', (request, response) => {
 
 app.get('/home', function(request, response) {
 	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html')
+});
+
+//Change the path to the files
+app.get('/home', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/home.html')
+});
+
+app.get('/setting', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/settings.html')
+});
+
+app.get('/account', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/account.html')
+});
+
+app.get('/sales', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/sales.html')
+});
+
+app.get('/inventory', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/inventory.html')
+});
+
+app.get('/order_forms', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/order_forms.html')
 });
 
 app.listen(3000);
