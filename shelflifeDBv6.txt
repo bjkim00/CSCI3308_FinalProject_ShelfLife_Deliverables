@@ -1,0 +1,81 @@
+
+//1. input each table in order
+//2. input scripts to tables 
+//Note: change paths in scripts to your computer
+
+
+CREATE TABLE USERS
+(
+Restaurant_Id INT,      
+Restaurant_Name VARCHAR(50),                                                
+Phone VARCHAR(50),
+Address_line_1 VARCHAR(50),
+Address_line_2 VARCHAR(50)  
+User_Name VARCHAR(50),
+User_Password VARCHAR(50),                                                     
+);
+
+CREATE TABLE DISHES(
+Dish_ID SERIAL PRIMARY KEY,
+Dish_Name varchar(50),
+Dish_Cost FLOAT
+);
+
+CREATE TABLE ORDERS(
+Order_ID SERIAL PRIMARY KEY,
+USER_ID INT,
+Date TIMESTAMP UNIQUE,
+Dish_ID INT,
+FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
+);
+
+
+
+CREATE TABLE Inventory(
+  Ingredient_ID serial PRIMARY KEY,
+  Ingredient_Group_ID int,
+  ingredient_name varchar(50),
+  Ingredient_Quantity int,
+  Ingredient_Cost float,
+  Ingredient_Unit varchar(50)
+);
+
+CREATE TABLE Dish_2_Ingredients(
+  Dish_ID int,
+  Ingredient_ID int,
+  Ingredient_Quanity float,
+  FOREIGN KEY (Ingredient_ID) REFERENCES Inventory(Ingredient_ID),
+  FOREIGN KEY (Dish_ID) REFERENCES DISHES(Dish_ID)
+);
+
+CREATE TABLE Sales(
+Order_ID INT,
+Dish_ID INT,
+Date TIMESTAMP,
+Cost FLOAT,
+FOREIGN KEY(Date) REFERENCES ORDERS(Date)
+);
+
+CREATE TABLE Order_Form(
+Order_Form_Id Serial PRIMARY KEY,
+User_ID INT,
+DateHolder date,
+Quantity INT, 
+Cost FLOAT
+);
+
+/////////SCRIPT TO READ USERS////////////////
+--shelflife=# \COPY users(restaurant_id, restaurant_name, phone, address_line_1, address_line_2, user_name, user_password) FROM '/Users/maurovargas/Documents/CSCI3308_FinalProject_ShelfLife_Deliverables-master/Shelf_life/Shelf_Files/user_File.csv' DELIMITER ',' CSV HEADER;
+
+
+///////// SCRIPT TO READ DISH_INVENTORY////////////////
+--shelflife=# \COPY dishes(dish_name, dish_cost) FROM '/Users/maurovargas/documents/CSCI3308/node-api-postgres/shelflife_files/Dish_Inventory.csv' DELIMITER ',' CSV HEADER;
+
+///////// SCRIPT TO READ INVENTORY FILE /////////////////
+--shelflife=# 
+\COPY inventory(ingredient_group_id, ingredient_name, ingredient_quantity, ingredient_cost, ingredient_unit) FROM '/Users/maurovargas/Documents/CSCI3308/node-api-postgres/shelflife_files/inventoryFile.csv' DELIMITER ',' CSV HEADER;
+
+
+///////// SCRIPT TO READ DISH_2_INGREDIENTSFILE ////////////////
+--shelflife=# \COPY Dish_2_Ingredients(Dish_ID, Ingredient_ID, Ingredient_Quanity
+) FROM '/Users/maurovargas/Documents/SHELFLIFE/Dish_2_IngredientsFile.csv' DELIMITER ',' CSV HEADER;
