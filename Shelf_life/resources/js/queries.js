@@ -87,6 +87,7 @@ const updatePassword = (request, response) => {
         throw error
       }
       response.status(201).send(`User password modified with username: ${username}`)
+      response.redirect('/setting')
     }
   )
 }
