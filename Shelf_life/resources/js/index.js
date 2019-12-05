@@ -7,13 +7,20 @@ const hostname = '127.0.0.1';
 const port = 3000
 const fs = require('fs');//read login file
 var pg=require('pg-promise')();
+//onst Plotly= require('plotly')("haley_hartin", "FWN70F2o9HF25cJYmOVQ");
+var Chart = require('chart.js');
+var moment = require('moment');
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 )
-
+//app.set('view engine', 'jade');
+//app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'html');
+var S = require('string');
+//var replacee = require("replace");
 const dbConfig={
 	host: 'localhost',
 	port: 5431,  //probably 5432 for you
@@ -23,14 +30,33 @@ const dbConfig={
 };
 
 var db=pg(dbConfig);
+
+
+var timedata = [];
+var chartData = [];
+var i=0;
+var get;
+var sum;
+var salesdata=0;
+var result;
+
 //create six functions for six routes
 app.get('/users', dbb.getUsers)
 app.get('/users/:id', dbb.getUserById)
 app.post('/users', dbb.createUser)
 app.put('/users/:id', dbb.updateUser)
 app.delete('/users/:id', dbb.deleteUser)
-app.post('/settings', dbb.updatePassword)
 
+var stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+var d = new Date();
+var t = d.getHours();
+var n = d.getDate();
+var day= d.getDay();
+var month = d.getMonth();
+var year = d.getYear();
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var months= ['January', 'Feburary', 'March', 'April', 'May','June', 'July', 'August','September','October','November','December'];
+var title;
 
 
 app.get('/login', function(req, res) {
@@ -55,7 +81,7 @@ app.post('/auth', function(request, response) {
 							if (results.length > 0) {
 									//request.session.loggedin = true;
 									//request.session.username = username;
-									response.redirect('/home');
+									response.redirect('/work_home');
 						} else {
 								response.redirect('/login');
 				}
@@ -81,39 +107,506 @@ app.post('/reg', function(request, response) {
 app.get('/register', (request, response) => {
   console.log("in register");
   response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/register2.html')
+});
+
+app.get('/home', function(request, res) {
+  fs.readFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html', 'utf-8', function (err, data) {
+
+                   console.log('timedata:', timedata);
+                   console.log('chart data: ', chartData)
+
+                   var resultt = data.replace('{{chartData}}', JSON.stringify(chartData));
+                   //console.log('date:', result)
+                   var resultt = resultt.replace('{{time}}', JSON.stringify(timedata));
+                   var resultt = resultt.replace('{{salesdata}}', JSON.stringify(salesdata));
+
+                   //console.log('date:', result)
+                   res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
+                   //console.log(result);
+                   res.write(resultt);
+
+
+        });
+});
+
+app.get('/send_order', function (req, res) {
+  get_dishes='select * from dishes;';
+  db.any(get_dishes)
+      .then(function(results){
+        fs.readFile('/Users/haleyhartin/Documents/ShelfLife/views/send_order.html', 'utf-8', function (err, data) {
+          console.log('in funct');
+          console.log('total in order:', total)
+          if(results.length==1)
+          {
+            result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+          }
+          if(results.length==2)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+          }
+          if(results.length==3)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  class="btn btn-danger" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit" class="btn btn-danger" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit" class="btn btn-danger" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+          }
+          if(results.length==4)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit"  value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit"  value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+          }
+          if(results.length==5)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit"  value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit"  value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+             result = result.replace('<p hidden>5</p>', '<input type="submit"  value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+          }
+          if(results.length==6)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit"  value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit"  value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+             result = result.replace('<p hidden>5</p>', '<input type="submit"  value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+             result = result.replace('<p hidden>6</p>', '<input type="submit"  value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+          }
+          if(results.length==7)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit"  value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit"  value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+             result = result.replace('<p hidden>5</p>', '<input type="submit"  value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+             result = result.replace('<p hidden>6</p>', '<input type="submit"  value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+             result = result.replace('<p hidden>7</p>', '<input type="submit"  value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+          }
+          if(results.length==8)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit"  value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit"  value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit"  value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit"  value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+             result = result.replace('<p hidden>5</p>', '<input type="submit"  value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+             result = result.replace('<p hidden>6</p>', '<input type="submit"  value="'+ results[4].dish_name + '" name="'+ results[5].dish_name + '">');
+             result = result.replace('<p hidden>7</p>', '<input type="submit"  value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+             result = result.replace('<p hidden>8</p>', '<input type="submit"  value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+          }
+          if(results.length==0){
+             result = result.replace('<p hidden>9</p>', 'No menu items to display');
+          }
+
+
+
+
+          //var result = result.replace('{{dishname}}', JSON.stringify(results[0].dish_name));
+          //console.log(result);
+          //res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':result.length });
+          res.write(result);
+          //console.log('picked:' , req.body.choose);
+
+        });
+      })
+      .catch(function(err){
+      console.log("error",err);
+     })
+    //total=0;
+});
+
+var total=0;
+
+app.post('/menu', function (req, res) {
+  var dish_id;
+  var dish;
+  var i;
+  var x=0;
+  console.log('result', result)
+  //console.log('picked:' , req.body)
+  dish=JSON.stringify(req.body);
+  console.log('string', dish)
+  var x = dish.length-5-((dish.length-7)/2)
+  //car s1= dish.substring(2,dish.length-);
+
+  var time=stamp;
+
+  dishh= dish.substring(2,x);
+  console.log('dish', dishh)
+
+  get_id = 'select dish_id from dishes where dish_name = $1;';
+  db.any(get_id, dishh)
+      .then(function(results){
+        dish_id=results[0].dish_id;
+        get_ingredients='select ingredient_quanity, ingredient_id from dish_2_ingredients where dish_id=$1;';
+        db.any(get_ingredients, dish_id)
+            .then(function(results){
+                  set_inventory='UPDATE inventory SET ingredient_quantity=(SELECT ingredient_quantity FROM inventory WHERE ingredient_id=$1)-(SELECT ingredient_quanity FROM dish_2_ingredients WHERE dish_id=$2 and ingredient_id= $3) WHERE ingredient_id=$4;';
+                  for(i=0; i<results.length; i++){
+                  db.any(set_inventory, [results[i].ingredient_id, dish_id, results[i].ingredient_id, results[i].ingredient_id])
+                      .then(function(results){
+                        console.log('worked')
+                      })
+                      .catch(function(err){
+                      console.log("error",err);
+                    })
+                }
+              })
+            .catch(function(err){
+            console.log("error",err);
+            })
+        num_orders='select count(order_id) from orders;';
+        db.any(num_orders)
+          .then(function(results){
+               if(results[0].count==null)
+               {
+                 new_id=1;
+               }
+               else{
+                  new_id=parseInt(results[0].count)+10;
+               }
+               var time= moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
+               order='insert into orders(order_id, user_id, date, dish_id) values($1, $2, $3, $4);';
+               db.any(order, [new_id, 150, time, dish_id])
+                   .then(function(results){
+                     //console.log('order time:', time)
+                     get_cost='select dish_cost from dishes where dish_id=$1;';
+                     db.any(get_cost, dish_id)
+                      .then(function(results){
+                        cost=parseInt(results[0].dish_cost)
+                        total=total+cost;
+                        console.log('total in menu', total)
+                        var money = result.replace('0 ', JSON.stringify(total));
+                        res.write(money)
+                        //});
+                        //console.log('sale time:', time)
+                        sales='insert into sales(order_id, dish_id, date, cost) values($1, $2, $3, $4);';
+                        db.any(sales, [new_id, dish_id, time, cost])
+                         .then(function(results){
+                           console.log('inserted')
+                         })
+                         .catch(function(err){
+                          console.log("error",err);
+                          })
+                     })
+                     .catch(function(err){
+                      console.log("error",err);
+                      })
+               })
+               .catch(function(err){
+                console.log("error",err);
+                })
+
+           })
+
+         .catch(function(err){
+          console.log("error",err);
+          })
+
 })
-
-app.get('/home', function(request, response) {
-	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/home.html')
+//console.log('at end')
+//res.redirect('/send_order')
 });
 
-//Change the path to the files
-app.get('/home', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/home.html')
+
+app.get('/submit', function (req, res) {
+  console.log('in submit', total)
+   //res.write('Order submitted. Order Total:')
+   //console.log('result:', result)
+   res.redirect('/work_home')
+   res.end()
 });
 
-app.get('/setting', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/settings.html')
+
+
+
+app.get('/work_home', function(req, res) {
+    stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    //console.log(stamp);
+    timedata=[];
+    chartData=[];
+      for(i=1; i<t; i++){
+         get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2;';
+         db.any(get, [n, i])
+         .then(function(results){
+            if (results[0].sum==null){
+                 sum=0;
+                }
+            else{
+              sum=results[0].sum;
+            }
+            chartData.push(sum);
+            //console.log(sum,' ', i, ' ', t);
+            //console.log('chart data: ', chartData)
+
+
+        })
+        .catch(function(err){
+            console.log("error",err);
+          })
+      timedata.push(i);
+      }
+      sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2';
+      db.any(sale, [day, month])
+        .then(function(results){
+          if (results[0].sum==null){
+               salesdata=0;
+              }
+          else{
+            salesdata=results[0].sum;
+          }
+          })
+        .catch(function(err){
+          console.log("error",err);
+      })
+
+res.redirect('/home');
 });
 
-app.get('/account', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/account.html')
+app.post('/table', function (req, res) {
+    // If it's not showing up, just use req.body to see what is actually being passed.
+    chartData=[];
+    timedata=[];
+    console.log('picked:' , req.body.selectpicker);
+    if(req.body.selectpicker=='1'){
+      res.redirect('/today')
+    }
+   if(req.body.selectpicker=='2'){
+      res.redirect('/week')
+    }
+    if(req.body.selectpicker=='3'){
+      res.redirect('/month')
+    }
+    if(req.body.selectpicker=='4'){
+      res.redirect('/year')
+    }
+
 });
 
-app.get('/sales', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/sales.html')
+app.get('/today', function(req, res) {
+    stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    //console.log(stamp);
+    timedata=[];
+    chartData=[];
+      for(i=1; i<t; i++){
+         get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)= $3';
+         db.any(get, [n, i, month])
+         .then(function(results){
+            if (results[0].sum==null){
+                 sum=0;
+                }
+            else{
+              sum=results[0].sum;
+            }
+            chartData.push(sum);
+            //console.log(sum,' ', i, ' ', t);
+            //console.log('chart data: ', chartData)
+
+
+        })
+        .catch(function(err){
+            console.log("error",err);
+          })
+      timedata.push(i);
+      }
+      sale= 'select sum(cost) from sales where extract(day from date)= $1;';
+      db.any(sale, n)
+        .then(function(results){
+          if (results[0].sum==null){
+               salesdata=0;
+              }
+          else{
+            salesdata=results[0].sum;
+          }
+          })
+        .catch(function(err){
+          console.log("error",err);
+        })
+
+res.redirect('/sales');
 });
 
-app.get('/inventory', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/inventory.html')
+app.get('/week', function(req, res) {
+    var x;
+    stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    console.log(stamp);
+    timedata=[];
+    chartData=[];
+    title= 'Weekly Sales';
+      for(i=6; i>=0; i--){
+         get = 'select sum(cost) from sales where extract(day from date)= $1;';
+         if(n-i<=0)
+         {
+           x=30-(i-n);
+         }
+         else{
+           x=n-i;
+         }
+         db.any(get, x)
+         .then(function(results){
+           console.log('day: ', stamp-i);
+            if (results[0].sum==null){
+                 sum=0;
+                }
+            else{
+              sum=results[0].sum;
+            }
+            chartData.push(sum);
+            console.log(results);
+            console.log('chart data: ', chartData)
+
+
+        })
+        .catch(function(err){
+            console.log("error",err);
+          })
+      if(day-i<0){
+        timedata.push(days[7-(i-day)]);
+      }
+      else{
+        timedata.push(days[day-i])
+      }
+
+      }
+
+      sale= 'select sum(cost) from sales where (extract(day from date)= $1 or extract(day from date)= $2 or extract(day from date)= $3 or extract(day from date)= $4 or extract(day from date)= $5 or extract(day from date)= $6 or extract(day from date)= $7) and extract(month from date)= $8;';
+      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6,month])
+        .then(function(results){
+          if (results[0].sum==null){
+               salesdata=0;
+              }
+          else{
+            salesdata=results[0].sum;
+          }
+          })
+        .catch(function(err){
+          console.log("error",err);
+        })
+res.redirect('/sales');
 });
 
-app.get('/order_forms', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/order_forms.html')
+app.get('/month', function(req, res) {
+var x;
+stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+console.log(stamp);
+timedata=[];
+chartData=[];
+title= 'Monthly Sales';
+  for(i=1; i<=n; i++){
+     get = 'select sum(cost) from sales where extract(day from date)= $1;';
+     db.any(get, i)
+     .then(function(results){
+        if (results[0].sum==null){
+             sum=0;
+            }
+        else{
+          sum=results[0].sum;
+        }
+        chartData.push(sum);
+        //console.log(results);
+        //console.log('chart data: ', chartData)
+
+
+    })
+    .catch(function(err){
+        console.log("error",err);
+      })
+
+    timedata.push(i)
+  }
+  sale= 'select sum(cost) from sales where extract(month from date)= $1 and extract(year from date)= $2;';
+  db.any(sale, [month, year])
+    .then(function(results){
+      if (results[0].sum==null){
+           salesdata=0;
+          }
+      else{
+        salesdata=results[0].sum;
+      }
+      })
+    .catch(function(err){
+      console.log("error",err);
+    })
+res.redirect('/sales');
 });
+
+app.get('/year', function(req, res) {
+var x;
+stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+console.log(stamp);
+timedata=[];
+chartData=[];
+title='Yearly Sales';
+  for(i=0; i<12; i++){
+     get = 'select sum(cost) from sales where extract(month from date)= $1;';
+     db.any(get, i)
+     .then(function(results){
+        if (results[0].sum==null){
+             sum=0;
+            }
+        else{
+          sum=results[0].sum;
+        }
+        chartData.push(sum);
+        console.log(results);
+        console.log('chart data: ', chartData)
+
+
+    })
+    .catch(function(err){
+        console.log("error",err);
+      })
+
+    timedata.push(months[i]);
+  }
+  sale= 'select sum(cost) from sales where extract(year from date)= $1;';
+  db.any(sale, year)
+    .then(function(results){
+      if (results[0].sum==null){
+           salesdata=0;
+          }
+      else{
+        salesdata=results[0].sum;
+      }
+      })
+    .catch(function(err){
+      console.log("error",err);
+  })
+
+res.redirect('/sales');
+});
+
+
+app.get('/sales', function(req, res){
+     fs.readFile('/Users/haleyhartin/Documents/ShelfLife/views/sales.html', 'utf-8', function (err, data) {
+
+                 console.log('timedata:', timedata);
+                 console.log('chart data: ', chartData)
+
+                 var resultt = data.replace('{{chartData}}', JSON.stringify(chartData));
+                 //console.log('date:', result)
+                 var resultt = resultt.replace('{{time}}', JSON.stringify(timedata));
+                 var resultt = resultt.replace('{{title}}', JSON.stringify(title));
+                 var resultt = resultt.replace('{{sales}}', JSON.stringify(salesdata));
+                 //console.log('date:', result)
+                 res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
+                 res.write(resultt);
+                res.end();
+             });
+});
+
+
+app.post('/nav', function(req, res){
+   console.log("in nav: ", navbar.body)
+ });
+
+
+
+
+
+
 
 app.listen(3000);
 console.log('3000 is the magic port');
-//app.listen(port, hostname, () => {
-//  console.log(`Server running at http://${hostname}:${port}/`);
-//});
