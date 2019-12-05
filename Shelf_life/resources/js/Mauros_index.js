@@ -31,27 +31,6 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 var db=pg(dbConfig);
 
-app.get('/inventory', function(req,res) {
-  var query = "select * from inventory;";
-  db.task('get-everything', task => {
-    return task.batch([
-      task.any(query)
-    ]);
-  })
-  .then(data => {
-    res.render('inventory.pug', {
-      my_title: "Inventory Page",
-      inventory_item: data[0]
-    })
-  })
-  .catch(error => {
-    console.log("error");
-    res.render('inventory.pug', {
-      my_title: "Inventory Page",
-      inventory_item: ""
-    })
-  })
-});
 
 ///////////////////////////////////////////////////////////////////////////////
 // routes
@@ -92,24 +71,56 @@ app.post('/auth', function(request, response) {
   }
 });
 
-app.get('/order_forms', (request, response) => {
-  var query = "select * from inventory;";
+app.get('/inventory', function(req,res) {
+  var query = "select * from inventory where ingredient_quantity > 10;";
+  var query1 = "select * from inventory where ingredient_quantity <= 10";
   db.task('get-everything', task => {
     return task.batch([
-      task.any(query)
+      task.any(query),
+      task.any(query1)
     ]);
   })
   .then(data => {
-    response.render('order_forms.pug', {
+    res.render('inventory.pug', {
       my_title: "Inventory Page",
-      inventory_item: data[0]
+      inventory_item_Full: data[0],
+      inventory_item_AlmostEmpty: data[1]
+
     })
   })
   .catch(error => {
     console.log("error");
-    response.render('order_forms.pug', {
+    res.render('inventory.pug', {
       my_title: "Inventory Page",
-      inventory_item: ""
+      inventory_item_Full: "",
+      inventory_item_AlmostEmpty: ""
+    })
+  })
+});
+
+app.get('/order_forms', (req, res) => {
+  var query = "select * from inventory where ingredient_quantity > 10;";
+  var query1 = "select * from inventory where ingredient_quantity <= 10";
+  db.task('get-everything', task => {
+    return task.batch([
+      task.any(query),
+      task.any(query1)
+    ]);
+  })
+  .then(data => {
+    res.render('order_forms.pug', {
+      my_title: "Inventory Page",
+      inventory_item_Full: data[0],
+      inventory_item_AlmostEmpty: data[1]
+
+    })
+  })
+  .catch(error => {
+    console.log("error");
+    res.render('order_forms.pug', {
+      my_title: "Inventory Page",
+      inventory_item_Full: "",
+      inventory_item_AlmostEmpty: ""
     })
   })
   console.log("in order forms");
