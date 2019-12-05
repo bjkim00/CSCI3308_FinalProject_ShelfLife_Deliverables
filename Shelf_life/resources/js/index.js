@@ -7,6 +7,7 @@ const hostname = '127.0.0.1';
 const port = 3000
 const fs = require('fs');//read login file
 var pg=require('pg-promise')();
+var pug = require('pug');
 //onst Plotly= require('plotly')("haley_hartin", "FWN70F2o9HF25cJYmOVQ");
 var Chart = require('chart.js');
 var moment = require('moment');
@@ -16,6 +17,7 @@ app.use(
     extended: true,
   })
 )
+app.set('view engine', 'pug');
 //app.set('view engine', 'jade');
 //app.engine('html', require('ejs').renderFile);
 //app.set('view engine', 'html');
@@ -37,15 +39,19 @@ var chartData = [];
 var i=0;
 var get;
 var sum;
-var salesdata=0;
+var salesdata;
 var result;
+var totalsalesdata;
 
 //create six functions for six routes
-app.get('/users', dbb.getUsers)
+//app.get('/users', dbb.getUsers)
 app.get('/users/:id', dbb.getUserById)
-app.post('/users', dbb.createUser)
+//app.post('/users', dbb.createUser)
 app.put('/users/:id', dbb.updateUser)
 app.delete('/users/:id', dbb.deleteUser)
+app.post('/users', dbb.createUser)
+app.post('/order', dbb.updateInventory)
+
 
 var stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
 var d = new Date();
@@ -58,12 +64,57 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var months= ['January', 'Feburary', 'March', 'April', 'May','June', 'July', 'August','September','October','November','December'];
 var title;
 
+app.get('/inventory', function(req,res) {
+  var query = "select * from inventory;";
+  db.task('get-everything', task => {
+    return task.batch([
+      task.any(query)
+    ]);
+  })
+  .then(data => {
+    res.render('/Users/haleyhartin/Documents/ShelfLife/views/inventory.pug', {
+      my_title: "Inventory Page",
+      inventory_item: data[0]
+    })
+  })
+  .catch(error => {
+    console.log("error");
+    res.render('/Users/haleyhartin/Documents/ShelfLife/views/inventory.pug', {
+      my_title: "Inventory Page",
+      inventory_item: ""
+    })
+  })
+});
+
+app.get('/order_forms', (request, response) => {
+  var query = "select * from inventory;";
+  db.task('get-everything', task => {
+    return task.batch([
+      task.any(query)
+    ]);
+  })
+  .then(data => {
+    response.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
+      my_title: "Inventory Page",
+      inventory_item: data[0]
+    })
+  })
+  .catch(error => {
+    console.log("error");
+    response.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
+      my_title: "Inventory Page",
+      inventory_item: ""
+    })
+  })
+  console.log("in order forms");
+})
 
 app.get('/login', function(req, res) {
     //res.sendFile('views/login.html', ,{root: __dirname })
     res.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/login.html','/Users/haleyhartin/Documents/ShelfLife/resources/css/signin.css')
 		console.log('app.get');
 		console.log(req.action);
+    //res.end();
 });
 
 app.post('/auth', function(request, response) {
@@ -96,8 +147,6 @@ app.post('/auth', function(request, response) {
   }
 });
 
-
-
 app.post('/reg', function(request, response) {
  console.log("redirect");
  response.redirect('/register');
@@ -124,6 +173,7 @@ app.get('/home', function(request, res) {
                    res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
                    //console.log(result);
                    res.write(resultt);
+                   res.end();
 
 
         });
@@ -310,7 +360,6 @@ app.post('/menu', function (req, res) {
 //res.redirect('/send_order')
 });
 
-
 app.get('/submit', function (req, res) {
   console.log('in submit', total)
    //res.write('Order submitted. Order Total:')
@@ -319,50 +368,61 @@ app.get('/submit', function (req, res) {
    res.end()
 });
 
-
-
-
 app.get('/work_home', function(req, res) {
     stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    d = new Date();
+    console.log(d)
+    t = d.getHours();
+    n = d.getDate();
+    sum=0;
+    salesdata=0;
+    //day= d.getDay() + 1;
+    month = d.getMonth() +1 ;
+    year = d.getYear();
     //console.log(stamp);
     timedata=[];
     chartData=[];
-      for(i=1; i<t; i++){
-         get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2;';
-         db.any(get, [n, i])
-         .then(function(results){
-            if (results[0].sum==null){
-                 sum=0;
-                }
-            else{
-              sum=results[0].sum;
-            }
-            chartData.push(sum);
-            //console.log(sum,' ', i, ' ', t);
-            //console.log('chart data: ', chartData)
-
-
+    for(i=1; i<t; i++){
+       get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2;';
+       db.any(get, [n, i])
+       .then(function(results){
+          if (results[0].sum==null){
+               sum=0;
+              }
+          else{
+            sum=results[0].sum;
+          }
+          chartData.push(sum);
+      })
+      .catch(function(err){
+          console.log("error",err);
         })
-        .catch(function(err){
-            console.log("error",err);
-          })
-      timedata.push(i);
-      }
-      sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2';
-      db.any(sale, [day, month])
+    console.log('sum', sum)
+
+    timedata.push(i);
+    }
+
+    sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2';
+      console.log(n, month)
+      db.any(sale, [n, month])
         .then(function(results){
           if (results[0].sum==null){
+               //console.log('here??')
                salesdata=0;
               }
           else{
             salesdata=results[0].sum;
+            console.log('1st salesdata', salesdata)
           }
+          console.log('sum', results[0].sum)
           })
-        .catch(function(err){
+          .catch(function(err){
           console.log("error",err);
-      })
-
+          })
+console.log('salesdata', salesdata)
 res.redirect('/home');
+//res.end();
+
 });
 
 app.post('/table', function (req, res) {
@@ -372,27 +432,40 @@ app.post('/table', function (req, res) {
     console.log('picked:' , req.body.selectpicker);
     if(req.body.selectpicker=='1'){
       res.redirect('/today')
+      res.end()
     }
    if(req.body.selectpicker=='2'){
       res.redirect('/week')
+      res.end()
     }
     if(req.body.selectpicker=='3'){
       res.redirect('/month')
+      res.end()
     }
     if(req.body.selectpicker=='4'){
       res.redirect('/year')
+      res.end()
     }
 
 });
 
 app.get('/today', function(req, res) {
     stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    d = new Date();
+    console.log(d)
+    t = d.getHours();
+    n = d.getDate();
+    month=month+1
+    console.log(n,t)
+    //day= d.getDay() + 1;
+    //month = d.getMonth() +1 ;
+    year = d.getYear();
     //console.log(stamp);
     timedata=[];
     chartData=[];
       for(i=1; i<t; i++){
          get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)= $3';
-         db.any(get, [n, i, month])
+         db.any(get, [n, i, '12'])
          .then(function(results){
             if (results[0].sum==null){
                  sum=0;
@@ -408,11 +481,11 @@ app.get('/today', function(req, res) {
         })
         .catch(function(err){
             console.log("error",err);
-          })
+      })
       timedata.push(i);
       }
-      sale= 'select sum(cost) from sales where extract(day from date)= $1;';
-      db.any(sale, n)
+      sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
+      db.any(sale, [n,'12'])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -424,8 +497,9 @@ app.get('/today', function(req, res) {
         .catch(function(err){
           console.log("error",err);
         })
-
+console.log('today chart:', chartData)
 res.redirect('/sales');
+res.end();
 });
 
 app.get('/week', function(req, res) {
@@ -446,7 +520,7 @@ app.get('/week', function(req, res) {
          }
          db.any(get, x)
          .then(function(results){
-           console.log('day: ', stamp-i);
+           //console.log('day: ', stamp-i);
             if (results[0].sum==null){
                  sum=0;
                 }
@@ -454,8 +528,8 @@ app.get('/week', function(req, res) {
               sum=results[0].sum;
             }
             chartData.push(sum);
-            console.log(results);
-            console.log('chart data: ', chartData)
+            console.log(sum);
+
 
 
         })
@@ -470,9 +544,9 @@ app.get('/week', function(req, res) {
       }
 
       }
-
+      console.log('chart data: ', chartData)
       sale= 'select sum(cost) from sales where (extract(day from date)= $1 or extract(day from date)= $2 or extract(day from date)= $3 or extract(day from date)= $4 or extract(day from date)= $5 or extract(day from date)= $6 or extract(day from date)= $7) and extract(month from date)= $8;';
-      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6,month])
+      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6,'12'])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -484,40 +558,42 @@ app.get('/week', function(req, res) {
         .catch(function(err){
           console.log("error",err);
         })
+console.log('week sales', salesdata)
 res.redirect('/sales');
+res.end();
 });
 
 app.get('/month', function(req, res) {
 var x;
 stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-console.log(stamp);
+console.log('month day', n);
 timedata=[];
 chartData=[];
+summ=0;
 title= 'Monthly Sales';
-  for(i=1; i<=n; i++){
+  for(var i=1; i<=n; i++){
      get = 'select sum(cost) from sales where extract(day from date)= $1;';
      db.any(get, i)
      .then(function(results){
         if (results[0].sum==null){
-             sum=0;
+             summ=0;
             }
         else{
-          sum=results[0].sum;
+          summ=results[0].sum;
         }
-        chartData.push(sum);
-        //console.log(results);
-        //console.log('chart data: ', chartData)
-
-
-    })
+    chartData.push(summ);
+     console.log('sum1', summ)
+      })
     .catch(function(err){
         console.log("error",err);
       })
 
-    timedata.push(i)
+    //console.log('sum2', summ)
+
+    timedata.push(i);
   }
-  sale= 'select sum(cost) from sales where extract(month from date)= $1 and extract(year from date)= $2;';
-  db.any(sale, [month, year])
+  sale= 'select sum(cost) from sales where extract(month from date)= $1;';
+  db.any(sale, '12')
     .then(function(results){
       if (results[0].sum==null){
            salesdata=0;
@@ -534,6 +610,7 @@ res.redirect('/sales');
 
 app.get('/year', function(req, res) {
 var x;
+
 stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
 console.log(stamp);
 timedata=[];
@@ -541,7 +618,7 @@ chartData=[];
 title='Yearly Sales';
   for(i=0; i<12; i++){
      get = 'select sum(cost) from sales where extract(month from date)= $1;';
-     db.any(get, i)
+     db.any(get, i+1)
      .then(function(results){
         if (results[0].sum==null){
              sum=0;
@@ -549,9 +626,10 @@ title='Yearly Sales';
         else{
           sum=results[0].sum;
         }
+
+        console.log(sum);
         chartData.push(sum);
-        console.log(results);
-        console.log('chart data: ', chartData)
+        //console.log('chart data: ', chartData)
 
 
     })
@@ -562,7 +640,7 @@ title='Yearly Sales';
     timedata.push(months[i]);
   }
   sale= 'select sum(cost) from sales where extract(year from date)= $1;';
-  db.any(sale, year)
+  db.any(sale, '2019')
     .then(function(results){
       if (results[0].sum==null){
            salesdata=0;
@@ -578,6 +656,45 @@ title='Yearly Sales';
 res.redirect('/sales');
 });
 
+app.get('/sales1', function(req, res){
+  totalsalesdata=0;
+ console.log('day', n)
+  sales= 'select sum(cost) from sales;';
+  db.any(sales)
+    .then(function(results){
+      totalsalesdata=results[0].sum
+      sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
+      db.any(sale, [n ,'12'])
+        .then(function(results){
+          if (results[0].sum==null){
+               salesdata=0;
+              }
+          else{
+            salesdata=results[0].sum;
+            }
+            fs.readFile('/Users/haleyhartin/Documents/ShelfLife/views/sales1.html', 'utf-8', function (err, data) {
+
+                      //console.log('timedata:', timedata);
+                      //console.log('chart data: ', chartData)
+
+                      var resultt = data.replace('{{totalsales}}', JSON.stringify(totalsalesdata));
+                      var resultt = resultt.replace('{{sales}}', JSON.stringify(salesdata));
+                      //console.log('date:', result)
+                      res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
+                      res.write(resultt);
+                     res.end();
+              })
+            })
+            .catch(function(err){
+              console.log("error",err);
+            })
+          })
+      .catch(function(err){
+      console.log("error",err);
+    })
+
+
+});
 
 app.get('/sales', function(req, res){
      fs.readFile('/Users/haleyhartin/Documents/ShelfLife/views/sales.html', 'utf-8', function (err, data) {
@@ -601,11 +718,6 @@ app.get('/sales', function(req, res){
 app.post('/nav', function(req, res){
    console.log("in nav: ", navbar.body)
  });
-
-
-
-
-
 
 
 app.listen(3000);
