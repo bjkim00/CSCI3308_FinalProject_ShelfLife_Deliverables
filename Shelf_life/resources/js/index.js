@@ -51,6 +51,7 @@ app.put('/users/:id', dbb.updateUser)
 app.delete('/users/:id', dbb.deleteUser)
 app.post('/users', dbb.createUser)
 app.post('/order', dbb.updateInventory)
+app.post('/settings', dbb.updatePassword)
 
 
 var stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
@@ -719,6 +720,25 @@ app.post('/nav', function(req, res){
    console.log("in nav: ", navbar.body)
  });
 
+app.get('/account', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/account.html')
+});
+
+app.get('/inventory', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/inventory.html')
+});
+
+app.get('/order_forms1', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/order_forms.html')
+});
+
+app.get('/home', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/home.html')
+});
+
+app.get('/setting', function(request, response) {
+	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/settings.html')
+});
 
 app.listen(3000);
 console.log('3000 is the magic port');
