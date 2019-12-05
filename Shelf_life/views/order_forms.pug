@@ -24,8 +24,10 @@ html(lang='en', dir='ltr')
             a.nav-link(href='/views/sales.html') Sales
           li.nav-item
             a.nav-link(href='http://localhost:3000/inventory') Inventory
-            li.nav-item
-              a.nav-link(href='http://localhost:3000/order_forms') Order Forms
+          li.nav-item
+            a.nav-link(href='http://localhost:3000/order_forms') Order Forms
+          li.nav-item
+            a.nav-link(href='/views/setting') Order Forms
         ul.navbar-nav.float-right
           li.nav-item
             a.nav-link(href='/login') Login
@@ -64,15 +66,34 @@ html(lang='en', dir='ltr')
       background-color: #4d94ff;
       color: white;
       }
+    p Inventory supplies: NORMAL
     table#IngredientTable
       tr
         th Ingredient ID
         th Ingredient Name
         th Ingredient Quantity
         th Ingredient Unit
-      for item in inventory_item
+      for item in inventory_item_Full
         tr
           td #{item.ingredient_id}
           td #{item.ingredient_name}
           td #{item.ingredient_quantity}
           td #{item.ingredient_unit}
+    p
+      </br>
+      </br>
+      </br>
+    p Inventory supplies: LOW
+    table#IngredientTable
+      tr
+        th Ingredient ID
+        th Ingredient Name
+        th Ingredient Quantity
+        th Ingredient Unit
+      for item2 in inventory_item_AlmostEmpty
+        tr
+          td #{item2.ingredient_id}
+          td #{item2.ingredient_name}
+          td #{item2.ingredient_quantity}
+          td #{item2.ingredient_unit}
+
