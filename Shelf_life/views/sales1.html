@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <img id="jpg-export"></img>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <title>Sales</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <!--  Bootstrap + CSS    -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="../resources/css/my_style.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="home.html">
-        <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/work_home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="restaurant.html">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sales1">Sales<span class="sr-only">(current)</span></a>
-          </li>
-          <li>
-            <a class="nav-link" href="inventory.html">Inventory</a>
-          </li>
-          <li>
-            <a class="nav-link" href="order_forms.html">Order Forms</a>
-          </li>
-          <li>
-            <a class="nav-link" href="/send_order">Order</a>
-          </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <a href="login.html">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
-          </a>
-        </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Sales</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <!--  Bootstrap + CSS    -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="../resources/css/my_style.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">
+      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/work_home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="restaurant.html">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sales1">Sales<span class="sr-only">(current)</span></a>
+        </li>
+        <li>
+          <a class="nav-link" href="inventory.html">Inventory</a>
+        </li>
+        <li>
+          <a class="nav-link" href="order_forms.html">Order Forms</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/send_order">Order</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="login.html">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        </a>
       </div>
-    </nav>
-  <p> Todays Sales: {{sales}}</p>
+    </div>
+  </nav>
   <br>
-  <p> Total Sales: {{totalsales}}</p>
-  <p> View Sales:</p>
-  <form id="table" action="/table" method ="POST">
-         <select class="selectpicker" data-style="btn-info" name="selectpicker">
-             <optgroup label="Sales">
-               <option name="none" value='0'>Select Sales</option>
-               <option name="Today" value='1'>Today's Sales</option>
-               <option name="Week" value='2'>Week's Sales</option>
-               <option name="Month" value='3'>Month's Sales</option>
-               <option name="Year" value='4'>Year's Sales</option>
-             </optgroup>
-         </select>
-      <input type="submit"/>
-  </form>
+  <div class="container">
+    <div class="jumbotron" style="background-color:#90EE90">
+        <div class="clearfix">
+          <h2 class="jumbotron" align="center" style="background-color:#B0C4DE"> Todays Sales: {{sales}}</h2>
+          <br>
+          <h2 class="jumbotron" align="center" style="background-color:#B0C4DE"> Total Sales: {{totalsales}}</h2>
+        </div>
+      <br>
+      <div align="center">
+        <h3> View Sales:</h3>
+        <br>
+        <form id="table" action="/table" method="POST">
+          <select class="selectpicker" data-style="btn-info" name="selectpicker">
+            <optgroup label="Sales">
+              <option name="none" value='0'>Select Sales</option>
+              <option name="Today" value='1'>Today's Sales</option>
+              <option name="Week" value='2'>Week's Sales</option>
+              <option name="Month" value='3'>Month's Sales</option>
+              <option name="Year" value='4'>Year's Sales</option>
+            </optgroup>
+          </select>
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
