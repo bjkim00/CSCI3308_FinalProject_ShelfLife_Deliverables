@@ -38,10 +38,11 @@ var timedata = [];
 var chartData = [];
 var i=0;
 var get;
-var sum;
+var sum=0;
 var salesdata;
 var result;
 var totalsalesdata;
+var xaxis;
 
 //create six functions for six routes
 //app.get('/users', dbb.getUsers)
@@ -51,7 +52,8 @@ app.put('/users/:id', dbb.updateUser)
 app.delete('/users/:id', dbb.deleteUser)
 app.post('/users', dbb.createUser)
 app.post('/order', dbb.updateInventory)
-app.post('/settings', dbb.updatePassword)
+//app.post('/settings', dbb.updatePassword)
+
 
 
 var stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
@@ -66,49 +68,59 @@ var months= ['January', 'Feburary', 'March', 'April', 'May','June', 'July', 'Aug
 var title;
 
 app.get('/inventory', function(req,res) {
-  var query = "select * from inventory;";
+  var query = "select * from inventory where ingredient_quantity > 10;";
+  var query1 = "select * from inventory where ingredient_quantity <= 10";
   db.task('get-everything', task => {
     return task.batch([
-      task.any(query)
+      task.any(query),
+      task.any(query1)
     ]);
   })
   .then(data => {
     res.render('/Users/haleyhartin/Documents/ShelfLife/views/inventory.pug', {
       my_title: "Inventory Page",
-      inventory_item: data[0]
+      inventory_item_Full: data[0],
+      inventory_item_AlmostEmpty: data[1]
+
     })
   })
   .catch(error => {
     console.log("error");
     res.render('/Users/haleyhartin/Documents/ShelfLife/views/inventory.pug', {
       my_title: "Inventory Page",
-      inventory_item: ""
+      inventory_item_Full: "",
+      inventory_item_AlmostEmpty: ""
     })
   })
 });
 
-app.get('/order_forms', (request, response) => {
-  var query = "select * from inventory;";
+app.get('/order_forms', (req, res) => {
+  var query = "select * from inventory where ingredient_quantity > 10;";
+  var query1 = "select * from inventory where ingredient_quantity <= 10";
   db.task('get-everything', task => {
     return task.batch([
-      task.any(query)
+      task.any(query),
+      task.any(query1)
     ]);
   })
   .then(data => {
-    response.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
+    res.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
       my_title: "Inventory Page",
-      inventory_item: data[0]
+      inventory_item_Full: data[0],
+      inventory_item_AlmostEmpty: data[1]
+
     })
   })
   .catch(error => {
     console.log("error");
-    response.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
+    res.render('/Users/haleyhartin/Documents/ShelfLife/views/order_forms.pug', {
       my_title: "Inventory Page",
-      inventory_item: ""
+      inventory_item_Full: "",
+      inventory_item_AlmostEmpty: ""
     })
   })
   console.log("in order forms");
-})
+});
 
 app.get('/login', function(req, res) {
     //res.sendFile('views/login.html', ,{root: __dirname })
@@ -169,7 +181,7 @@ app.get('/home', function(request, res) {
                    //console.log('date:', result)
                    var resultt = resultt.replace('{{time}}', JSON.stringify(timedata));
                    var resultt = resultt.replace('{{salesdata}}', JSON.stringify(salesdata));
-
+                   var resultt = resultt.replace('{{Hour}}', JSON.stringify(xaxis));
                    //console.log('date:', result)
                    res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
                    //console.log(result);
@@ -265,17 +277,18 @@ app.get('/send_order', function (req, res) {
       .catch(function(err){
       console.log("error",err);
      })
-    //total=0;
+    total=0;
 });
 
-var total=0;
+
 
 app.post('/menu', function (req, res) {
+//var total=0;
   var dish_id;
   var dish;
   var i;
   var x=0;
-  console.log('result', result)
+  //console.log('result', result)
   //console.log('picked:' , req.body)
   dish=JSON.stringify(req.body);
   console.log('string', dish)
@@ -362,7 +375,7 @@ app.post('/menu', function (req, res) {
 });
 
 app.get('/submit', function (req, res) {
-  console.log('in submit', total)
+  //console.log('in submit', total)
    //res.write('Order submitted. Order Total:')
    //console.log('result:', result)
    res.redirect('/work_home')
@@ -372,39 +385,50 @@ app.get('/submit', function (req, res) {
 app.get('/work_home', function(req, res) {
     stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
     d = new Date();
+    var str;
     console.log(d)
     t = d.getHours();
     n = d.getDate();
-    sum=0;
     salesdata=0;
-    //day= d.getDay() + 1;
+    var x;
     month = d.getMonth() +1 ;
     year = d.getYear();
-    //console.log(stamp);
+    console.log('day and month and hour', n, month, t)
     timedata=[];
     chartData=[];
-    for(i=1; i<t; i++){
+    xaxis='Hour';
+    var i=1;
+    while(i<=t){
+       x=i;
        get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2;';
-       db.any(get, [n, i])
+       var sum = db.any(get, [n, i])
        .then(function(results){
-          if (results[0].sum==null){
-               sum=0;
-              }
-          else{
-            sum=results[0].sum;
-          }
-          chartData.push(sum);
-      })
+         if (results[0].sum==null){
+              return 0
+            }
+          return results[0].sum
+       })
       .catch(function(err){
           console.log("error",err);
-        })
-    console.log('sum', sum)
+       })
 
-    timedata.push(i);
+
+     sum.then(function(result) {
+       console.log('i', i)
+      chartData.push(result);
+     })
+     .catch(function(err){
+         console.log("error",err);
+      })
+    if(i>12)
+    {
+      x=i-12;
     }
-
+    timedata.push(x);
+    i=i+1
+    }
+    i=1;
     sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2';
-      console.log(n, month)
       db.any(sale, [n, month])
         .then(function(results){
           if (results[0].sum==null){
@@ -415,13 +439,16 @@ app.get('/work_home', function(req, res) {
             salesdata=results[0].sum;
             console.log('1st salesdata', salesdata)
           }
-          console.log('sum', results[0].sum)
+          //console.log('sum', results[0].sum)
+          //console.log('salesdata', salesdata)
+          res.redirect('/home');
+          res.end();
+
           })
           .catch(function(err){
           console.log("error",err);
           })
-console.log('salesdata', salesdata)
-res.redirect('/home');
+
 //res.end();
 
 });
@@ -457,35 +484,47 @@ app.get('/today', function(req, res) {
     t = d.getHours();
     n = d.getDate();
     month=month+1
-    console.log(n,t)
-    //day= d.getDay() + 1;
-    //month = d.getMonth() +1 ;
+    console.log('day, hour', n ,t)
     year = d.getYear();
-    //console.log(stamp);
     timedata=[];
     chartData=[];
-      for(i=1; i<t; i++){
+    xaxis='Hour';
+    title='Daily Sales'
+    var i=1;
+    var x;
+    while (i<=t){
+      x=i;
+      // for(var i=1; j=t, i<j; i++){
          get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)= $3';
-         db.any(get, [n, i, '12'])
+         var sum = db.any(get, [n, i, '12'])
          .then(function(results){
             if (results[0].sum==null){
-                 sum=0;
+                 return 0;
                 }
             else{
-              sum=results[0].sum;
+              return results[0].sum;
             }
-            chartData.push(sum);
-            //console.log(sum,' ', i, ' ', t);
-            //console.log('chart data: ', chartData)
-
-
         })
         .catch(function(err){
             console.log("error",err);
-      })
-      timedata.push(i);
+       })
+       sum.then(function(results){
+           console.log('pushinhg', results)
+           chartData.push(results);
+       })
+       .catch(function(err){
+           console.log("error",err);
+       })
+      if(i>12)
+      {
+        x=i-12;
       }
-      sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
+      timedata.push(x);
+      i=i+1
+      console.log('i,t', i,t)
+      }
+      i=0;
+      var sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
       db.any(sale, [n,'12'])
         .then(function(results){
           if (results[0].sum==null){
@@ -494,13 +533,13 @@ app.get('/today', function(req, res) {
           else{
             salesdata=results[0].sum;
           }
-          })
+
+          res.redirect('/sales');
+          res.end();
+        })
         .catch(function(err){
           console.log("error",err);
         })
-console.log('today chart:', chartData)
-res.redirect('/sales');
-res.end();
 });
 
 app.get('/week', function(req, res) {
@@ -509,6 +548,7 @@ app.get('/week', function(req, res) {
     console.log(stamp);
     timedata=[];
     chartData=[];
+    xaxis='Day';
     title= 'Weekly Sales';
       for(i=6; i>=0; i--){
          get = 'select sum(cost) from sales where extract(day from date)= $1;';
@@ -519,31 +559,30 @@ app.get('/week', function(req, res) {
          else{
            x=n-i;
          }
-         db.any(get, x)
+         //console.log('week day', x)
+         var sum = db.any(get, x)
          .then(function(results){
            //console.log('day: ', stamp-i);
             if (results[0].sum==null){
-                 sum=0;
+                 return 0;
                 }
             else{
-              sum=results[0].sum;
+              return results[0].sum;
             }
-            chartData.push(sum);
-            console.log(sum);
-
-
-
         })
         .catch(function(err){
             console.log("error",err);
-          })
+        })
+      sum.then(function(results){
+        //console.log('pushinhg', results)
+        chartData.push(results);
+      })
       if(day-i<0){
         timedata.push(days[7-(i-day)]);
       }
       else{
         timedata.push(days[day-i])
-      }
-
+        }
       }
       console.log('chart data: ', chartData)
       sale= 'select sum(cost) from sales where (extract(day from date)= $1 or extract(day from date)= $2 or extract(day from date)= $3 or extract(day from date)= $4 or extract(day from date)= $5 or extract(day from date)= $6 or extract(day from date)= $7) and extract(month from date)= $8;';
@@ -554,14 +593,14 @@ app.get('/week', function(req, res) {
               }
           else{
             salesdata=results[0].sum;
-          }
+            }
+            console.log('week sales', salesdata)
+            res.redirect('/sales');
+            res.end();
           })
         .catch(function(err){
           console.log("error",err);
         })
-console.log('week sales', salesdata)
-res.redirect('/sales');
-res.end();
 });
 
 app.get('/month', function(req, res) {
@@ -571,6 +610,7 @@ console.log('month day', n);
 timedata=[];
 chartData=[];
 summ=0;
+xaxis='Day';
 title= 'Monthly Sales';
   for(var i=1; i<=n; i++){
      get = 'select sum(cost) from sales where extract(day from date)= $1;';
@@ -617,30 +657,41 @@ console.log(stamp);
 timedata=[];
 chartData=[];
 title='Yearly Sales';
-  for(i=0; i<12; i++){
+xaxis='Month';
+var i=0;
+while(i<12)
+{
+// for(var i=0; i<12; i++){
      get = 'select sum(cost) from sales where extract(month from date)= $1;';
-     db.any(get, i+1)
-     .then(function(results){
+     var sum = db.any(get, i+1)
+    .then(function(results){
         if (results[0].sum==null){
-             sum=0;
+             return 0;
             }
         else{
-          sum=results[0].sum;
+          return results[0].sum;
         }
 
         console.log(sum);
         chartData.push(sum);
         //console.log('chart data: ', chartData)
-
-
     })
     .catch(function(err){
         console.log("error",err);
-      })
+    })
 
+    sum.then(function(results){
+        console.log('pushinhg', results)
+        chartData.push(results);
+    })
+    .catch(function(err){
+        console.log("error",err);
+    })
     timedata.push(months[i]);
+  i=i+1;
   }
-  sale= 'select sum(cost) from sales where extract(year from date)= $1;';
+i=0;
+  var sale= 'select sum(cost) from sales where extract(year from date)= $1;';
   db.any(sale, '2019')
     .then(function(results){
       if (results[0].sum==null){
@@ -649,12 +700,12 @@ title='Yearly Sales';
       else{
         salesdata=results[0].sum;
       }
-      })
+      res.redirect('/sales');
+      res.end();
+    })
     .catch(function(err){
       console.log("error",err);
   })
-
-res.redirect('/sales');
 });
 
 app.get('/sales1', function(req, res){
@@ -708,6 +759,7 @@ app.get('/sales', function(req, res){
                  var resultt = resultt.replace('{{time}}', JSON.stringify(timedata));
                  var resultt = resultt.replace('{{title}}', JSON.stringify(title));
                  var resultt = resultt.replace('{{sales}}', JSON.stringify(salesdata));
+                 var resultt = resultt.replace('{{axis}}', JSON.stringify(xaxis));
                  //console.log('date:', result)
                  res.writeHead(200, { 'Content-Type': 'text/html', 'Content-Length':resultt.length });
                  res.write(resultt);
@@ -715,30 +767,43 @@ app.get('/sales', function(req, res){
              });
 });
 
+// app.get('/account', function(request, response) {
+// 	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/account.html')
+// });
+app.get('/setting', function(request, response) {
+    response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/settings.html')
+});
+
+
+app.post('/settings', function(request, response) {
+    console.log('in here');
+    const username = request.body.User_Name;
+    const newPassword = request.body.User_Password_New;
+    const currentPassword = request.body.User_Password;
+    console.log("Username", username);
+    console.log("New Password", newPassword);
+    console.log("Current Password", currentPassword);
+    var sql= 'UPDATE users SET user_password = $1 WHERE user_name = $2 and user_password = $3;';
+    db.any(sql, [newPassword, username, currentPassword])
+      .then(function(results){
+        console.log(username);
+        console.log(currentPassword);
+        console.log(newPassword);
+      })
+        .catch(function(err){
+          console.log("error",err);
+      })
+        response.status(201).send(`User password modified with username: ${username}`)
+
+  response.redirect('/setting');
+});
+
+
 
 app.post('/nav', function(req, res){
    console.log("in nav: ", navbar.body)
  });
 
-app.get('/account', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/account.html')
-});
-
-app.get('/inventory', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/inventory.html')
-});
-
-app.get('/order_forms1', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/order_forms.html')
-});
-
-app.get('/home', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/home.html')
-});
-
-app.get('/setting', function(request, response) {
-	response.sendFile('/Users/bjkim/Desktop/ShelfLife/Shelf_life/views/settings.html')
-});
 
 app.listen(3000);
 console.log('3000 is the magic port');
