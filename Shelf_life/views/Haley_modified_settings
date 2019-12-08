@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="../resources/css/my_styles.css" rel="stylesheet">
+  <script src="/Users/bjkim/Desktop/ShelfLife/Shelf_life/resources/js/settings.js"></script>
+  <script src="/Users/bjkim/Desktop/ShelfLife/Shelf_life/resources/js/menuItems.js"></script>
+  <script>
+    function showPass() {
+      console.log("Show password");
+      var password = document.getElementById("User_Password");
+      if (password.type === "password") {
+      password.type = "text";
+      } else {
+      password.type = "password";
+      }
+    }
+    function showPassNew() {
+      console.log("Show password");
+      var password = document.getElementById("User_Password_New");
+      if (password.type === "password") {
+      password.type = "text";
+      } else {
+      password.type = "password";
+      }
+    }
+    function showPassNewReentered() {
+      console.log("Show password");
+      var password = document.getElementById("User_Password_New_Reentered");
+      if (password.type === "password") {
+      password.type = "text";
+      } else {
+      password.type = "password";
+      }
+    }
+    function checkPassword(form){
+      var User_Password_New = document.getElementById("User_Password_New").value;
+      var User_Password_New_Reentered = document.getElementById("User_Password_New_Reentered").value;
+      console.log(User_Password_New);
+      console.log(User_Password_New_Reentered);
+      if(User_Password_New == ''){
+        alert("Please enter Password");
+        location.reload();
+      }else if(User_Password_New_Reentered == ''){
+        alert("Please re-enter password to confirm new password");
+        location.reload();
+      }else if(User_Password_New != User_Password_New_Reentered){
+        alert("Passwords do not match: Please try again");
+        location.reload();
+        return false;
+      }else{
+        return true;
+      }
+    }
+  function menus() {
+
+        document.getElementById('menuItem').innerHTML +=
+          `
+          <p>hi</p>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" >Dish Name: </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" name="dishName" id="dishName" placeholder="e.g Chocolate Lava cake">
+            </div>
+            <label class=" col-form-label" >Dish Price: </label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control" name="dishPrice" id="dishPrice" placeholder="e.g $8.99">
+            </div>
+          </div>
+          <div class="form-group row textcenter" >
+            <label class="col-sm-2 col-form-label" for="menu"># of Ingredients: </label>
+            <div class="col-sm-2">
+              <input type="number" class="form-control" name="numIngredients" id="numIngredients" placeholder="e.g 4">
+            </div>
+              <div class="col-sm-3">
+                <button class="btn btn-primary btn-block" type="button" onclick="ingredients(); this.onclick=null;">Enter</button>
+              </div>
+          </div>
+          <div id="test">
+          <div>
+          `;
+
+    }
+
+    function ingredients(id) {
+      var numIngredients = document.getElementById('numIngredients' + id);
+      document.getElementById('test').innerHTML +=
+      for (var j = 0; j < numIngredients.value; j++) {
+
+          `<div class="form-group row">
+                <label class="col-sm-2 col-form-label"> Ingredient Name ${j+1}: </label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" name="ingName${j}" id="ingName${j}" placeholder="e.g Nutella">
+                </div>
+                <label class="col-sm-1"> Amount: </label>
+                <div class="col-sm-2">
+                  <input type="number" class="form-control" name="ingAmnt${j}" id="ingAmnt${j}" placeholder="e.g 3.5">
+                </div>
+                <label class="col-sm-1"> Cost: </label>
+                <div class="col-sm-2">
+                  <input type="number" class="form-control" name="ingCost${j}" id="ingCost${j}" placeholder="e.g $0.9">
+                </div>
+                <select name="pets" id="pet-select">
+                  <option value=""> Unit </option>
+                  <option value="dog">Whole Item(s)</option>
+                  <option value="cat">lbs</option>
+                  <option value="hamster">Oz</option>
+                  <option value="parrot">Gallons</option>
+                  <option value="spider">tb spoon(s)</option>
+                  <option value="goldfish">Fl Oz</option>
+                </select>
+              </div>
+              <input type="submit" value="Add menu" class="btn btn-primary btn-block">
+            `;
+      }
+    }
+  </script>
+  <style>
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+  }
+  #myInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  #myInput:focus {outline: 3px solid #ddd;}
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="home.html">
+      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/account">Account<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sales">Sales</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/inventory">Inventory</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/order_forms">Order Forms</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/setting">Settings</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <a href="login.html">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="center">
+      <a href="home.html">
+      <img class="rounded-circle center" src="../resources/img/logo.jpg" alt="LOGO" width="248" height="90">
+      </a>
+      <hr>
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Options</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#">Change Password</a>
+          <a href="#">Add items to menu</a>
+        </div>
+      </div>
+      <h1 class="textcenter">Changing Password</h1>
+      <br>
+    </div>
+    <form action = "/settings" method = "POST" onSubmit="return checkPassword(this)">    <!-- /users is a web folder to get to register.html to add the new users into the database -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="User_Name">User Name:</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="User_Name" id="User_Name" placeholder="Enter User Name">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="User_Password">Current Password:</label>
+        <div class="col-sm-3">
+          <input type="Password" class="form-control" name = "User_Password" id="User_Password" placeholder="Current Password">
+        </div>
+        <div class="col-sm-4">
+          <input type="checkbox" onclick="showPass()"> Show Password
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="User_Password">New Password:</label>
+        <div class="col-sm-3">
+          <input type="Password" class="form-control" name = "User_Password_New" id="User_Password_New" placeholder="New Password">
+        </div>
+        <div class="col-sm-4">
+          <input type="checkbox" onclick="showPassNew()"> Show Password
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label" for="User_Password">Re-enter New Password:</label>
+        <div class="col-sm-3">
+          <input type="Password" class="form-control" name = "User_Password_New_Reentered" id="User_Password_New_Reentered" placeholder="Re-enter New Password">
+        </div>
+        <div class="col-sm-4">
+          <input type="checkbox" onclick="showPassNewReentered()"> Show Password
+        </div>
+      </div>
+      <br><br><br><br>
+      <input type="submit" value="Change Password" class="btn btn-primary btn-block">
+    </form>
+    <br>
+
+
+    <form action = "/updateMenu" method = "POST">
+      <div class="form-group row textcenter">
+        <!-- <label class="col-sm-2 col-form-label" for="menu">Add Item: </label> -->
+        <!-- <div class="col-sm-3">
+          <input type="number" class="form-control" name="numItems" id="numItems" placeholder="e.g 12">
+        </div> -->
+        <!-- <div class="col-sm-3">
+        <button class="btn btn-primary btn-block" type="button" onclick="menus()">Add menu item</button>
+        </div> -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" >Dish Name: </label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" name="dishName" id="dishName" placeholder="e.g Chocolate Lava cake">
+          </div>
+          <label class=" col-form-label" >Dish Price: </label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="dishPrice" id="dishPrice" placeholder="e.g $8.99">
+          </div>
+        </div>
+        <div class="form-group row textcenter" >
+          <label class="col-sm-2 col-form-label" for="menu"># of Ingredients: </label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" name="numIngredients" id="numIngredients" placeholder="e.g 4">
+          </div>
+            <div class="col-sm-3">
+              <button class="btn btn-primary btn-block" type="button" onclick="ingredients(); this.onclick=null;">Enter</button>
+            </div>
+        </div>
+        <div id="test">
+          <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" name="ingName" id="ingName" placeholder="e.g Nutella">
+                </div>
+                <label class="col-sm-1"> Amount: </label>
+                <div class="col-sm-2">
+                  <input type="number" class="form-control" name="ingAmnt" id="ingAmnt" placeholder="e.g 3.5">
+                </div>
+                <label class="col-sm-1"> Cost: </label>
+                <div class="col-sm-2">
+                  <input type="number" class="form-control" name="ingCost" id="ingCost" placeholder="e.g $0.9">
+                </div>
+                <select name="pets" id="pet-select">
+                  <option value=""> Unit </option>
+                  <option value="Whole Item">Whole Item(s)</option>
+                  <option value="lbs">lbs</option>
+                  <option value="OZ">Oz</option>
+                  <option value="Gallons">Gallons</option>
+                  <option value="spoons">tb spoon(s)</option>
+                  <option value="Fl oz">Fl Oz</option>
+                </select>
+              </div>
+              <input type="submit" value="Add menu" class="btn btn-primary btn-block">
+
+    </form>
+  </div>
+</body>
+</html>
