@@ -798,7 +798,50 @@ app.post('/settings', function(request, response) {
   response.redirect('/setting');
 });
 
+app.post('/updateMenu', function(request, response) {
+    console.log('updating menus');
+    const dishName = request.body.dishName;
+    const dishPrice = request.body.dishPrice;
+    const ingredientName = request.body.ingName;
+    const ingredientQuanity = request.body.ingAmnt;
+    var ingredientID = 'select ingredient_id from inventory where ingredient_name = ingredientName;';
+    //const currentPassword = request.body.;
+    console.log("Dish Name", dishName);
+    console.log("Dish Price", dishPrice$);
+    console.log("Ingredient id", ingredientID)
+    //console.log("Current Password", currentPassword);
+    var sql = 'insert into dishes(dish_id, dish_name, dish_cost) values($1, $2, $3);';
+    db.any(sql, [1, dishName, dishPrice])
+      .then(function(results){
+        console.log(dishName);
+        console.log(dishPrice);
+      })
+        .catch(function(err){
+          console.log("error",err);
+      })
 
+	var sql2 = 'insert into dish_2_ingredients(dish_id, ingredient_id, ingredient_name, ingredient_quanity, dish_name) values ($1, $2, $3, $4, $5);';
+	db.any(sql2, [1, ingredientID, ingredientName, ingredientQuanity, dishName])
+	  .then(function(results){
+	  	console.log("In here");
+	  })
+	    .catch(function(err){
+	    	console.log("error, err");
+	  })
+	    response.status(201).send('Adding ingredient')
+	    response.rediredt('/setting');
+
+	var sql3 = 'insert into inventory(ingredient_id, ingredient_group_id, ingredient_quantity, ingredient_cost, ingredient_unit, restaurant_id) values ($1, $2, $3, $4, $5, $6);';
+	db.any(sql2, [1, ingredientID, ingredientName, ingredientQuanity, dishName])
+	  .then(function(results){
+	  	console.log("In here");
+	  })
+	    .catch(function(err){
+	    	console.log("error, err");
+	  })
+	    response.status(201).send('Adding ingredient')
+	    response.rediredt('/setting');
+});
 
 app.post('/nav', function(req, res){
    console.log("in nav: ", navbar.body)
