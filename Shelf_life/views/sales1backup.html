@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<img id="jpg-export"></img>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Sales</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!--  Bootstrap + CSS    -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="../resources/css/my_style.css" rel="stylesheet">
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 25px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #2392E5;
+}
+</style>
+  </head>
+<body>
+<nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href='/work_home'>
+    <img class="rounded-circle" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="hi" width="90" height="40">
+  </a>
+<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Togglenavigation">
+      <span class="navbar-toggler-icon"></span>
+
+</button> -->
+
+
+
+    <ul class="inline navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href='/work_home'>Home</a>
+      </li>
+    </ul>
+  <ul class="inline navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/setting">Account<span class="sr-only">(current)</span></a>
+      </li>
+  </ul>
+  <ul class="inline navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/sales1">Sales</a>
+      </li>
+  </ul>
+  <ul class="inline navbar-nav mr-auto">
+      <li class ="nav-item">
+        <a class = "nav-link" href = "http://localhost:3000/inventory" target = "_self">Inventory</a>
+      </li>
+  </ul>
+  <ul class="inline navbar-nav mr-auto">
+      <li>
+        <a class="nav-link" href="http://localhost:3000/order_forms">Order Forms</a>
+      </li>
+  </ul>
+  <ul class="inline navbar-nav mr-auto">
+      <li>
+        <a class="nav-link" href='/send_order'>Send Order</a>
+      </li>
+  </ul>
+
+    <div class="form-inline my-2 my-lg-0">
+      <a href="/login">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+      </a>
+    </div>
+
+</nav>
+
+<div class="container">
+<!-- end of nav bar -->
+<br>
+<h3>View {{name}}'s Past Sales</h3>
+<br>
+<br>
+<br>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <h3>Todays Sales</h3>
+      <p>{{sales}}</p>
+
+    </div>
+  </div>
+<div class="column">
+  <p>            </P>
+</div>
+
+
+<div class="column">
+   <div class="card">
+     <h3>Total Sales</h3>
+     <p>{{totalsales}}</</p>
+   </div>
+ </div>
+</div>
+
+<br>
+  <!-- <p> Todays Sales: {{sales}}</p>
+  <br>
+  <p> Total Sales: {{totalsales}}</p> -->
+  <!-- <p> View Sales:</p> -->
+  <form id="table" action="/table" method ="POST">
+         <select class="form-control selectpicker" data-style="btn-white" name="selectpicker">Select Sales
+             <optgroup label="Sales">
+               <option name="none" value='0'>Select Sales</option>
+               <option name="Today" value='1'>Today's Sales</option>
+               <option name="Week" value='2'>Week's Sales</option>
+               <option name="Month" value='3'>Month's Sales</option>
+               <option name="Year" value='4'>Year's Sales</option>
+             </optgroup>
+         </select>
+      <input type="submit"/>
+  </form>
+</div>
+</body>
