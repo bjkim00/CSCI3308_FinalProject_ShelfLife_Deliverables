@@ -20,7 +20,6 @@
       password.type = "password";
       }
     }
-
     function showPassNew() {
       console.log("Show password");
       var password = document.getElementById("User_Password_New");
@@ -30,7 +29,6 @@
       password.type = "password";
       }
     }
-
     function showPassNewReentered() {
       console.log("Show password");
       var password = document.getElementById("User_Password_New_Reentered");
@@ -40,7 +38,6 @@
       password.type = "password";
       }
     }
-
     function checkPassword(form){
       var User_Password_New = document.getElementById("User_Password_New").value;
       var User_Password_New_Reentered = document.getElementById("User_Password_New_Reentered").value;
@@ -60,7 +57,6 @@
         return true;
       }
     }
-
     function menus() {
       for (var i = 0; i < numItems.value; i++) {
         document.getElementById('menuItem').innerHTML +=
@@ -68,11 +64,11 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label" >Dish Name ${i+1}: </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" name="dishName${i}" id="dishName${i}" placeholder="e.g Chocolate Lava cake">
+              <input type="text" class="form-control" name="dishName" id="dishName${i}" placeholder="e.g Chocolate Lava cake">
             </div>
             <label class=" col-form-label" >Dish Price: </label>
             <div class="col-sm-2">
-              <input type="text" class="form-control" name="dishPrice${i}" id="dishPrice$${i}" placeholder="e.g $8.99">
+              <input type="text" class="form-control" name="dishPrice" id="dishPrice$${i}" placeholder="e.g $8.99">
             </div>
           </div>
           <div class="form-group row textcenter" >
@@ -85,12 +81,10 @@
               </div>
           </div>
           <div id="test${i}">
-
           <div>
           `;
       }
     }
-
     function ingredients(id) {
       var numIngredients = document.getElementById('numIngredients' + id);
       for (var j = 0; j < numIngredients.value; j++) {
@@ -99,32 +93,30 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label"> Ingredient Name ${j+1}: </label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" name="ingName${j}" id="ingName${j}" placeholder="e.g Nutella">
+                  <input type="text" class="form-control" name="ingName" id="ingName${j}" placeholder="e.g Nutella">
                 </div>
                 <label class="col-sm-1"> Amount: </label>
                 <div class="col-sm-2">
-                  <input type="number" class="form-control" name="ingAmnt${j}" id="ingAmnt${j}" placeholder="e.g 3.5">
+                  <input type="number" class="form-control" name="ingAmnt" id="ingAmnt${j}" placeholder="e.g 3.5">
                 </div>
                 <label class="col-sm-1"> Cost: </label>
                 <div class="col-sm-2">
-                  <input type="number" class="form-control" name="ingCost${j}" id="ingCost${j}" placeholder="e.g $0.9">
+                  <input type="number" class="form-control" name="ingCost" id="ingCost${j}" placeholder="e.g $0.9">
                 </div>
                 <select name="pets" id="pet-select">
                   <option value=""> Unit </option>
-                  <option value="dog">Whole Item(s)</option>
-                  <option value="cat">lbs</option>
-                  <option value="hamster">Oz</option>
-                  <option value="parrot">Gallons</option>
-                  <option value="spider">tb spoon(s)</option>
-                  <option value="goldfish">Fl Oz</option>
+                  <option value="Whole Item(s)">Whole Item(s)</option>
+                  <option value="lbs">lbs</option>
+                  <option value="Oz">Oz</option>
+                  <option value="Gallons">Gallons</option>
+                  <option value="tb spoon(s)">tb spoon(s)</option>
+                  <option value="Fl Oz">Fl Oz</option>
                 </select>
               </div>
               <input type="submit" value="Add menu" class="btn btn-primary btn-block">
-
             `;
       }
     }
-
   </script>
   <style>
   .dropbtn {
@@ -135,11 +127,9 @@
     border: none;
     cursor: pointer;
   }
-
   .dropbtn:hover, .dropbtn:focus {
     background-color: #3e8e41;
   }
-
   #myInput {
     box-sizing: border-box;
     background-image: url('searchicon.png');
@@ -150,14 +140,11 @@
     border: none;
     border-bottom: 1px solid #ddd;
   }
-
   #myInput:focus {outline: 3px solid #ddd;}
-
   .dropdown {
     position: relative;
     display: inline-block;
   }
-
   .dropdown-content {
     display: none;
     position: absolute;
@@ -167,66 +154,75 @@
     border: 1px solid #ddd;
     z-index: 1;
   }
-
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
-
   .dropdown a:hover {background-color: #ddd;}
-
   .show {display: block;}
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="home.html">
-      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href='/work_home'>
+      <img class="rounded-circle" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="hi" width="90" height="40">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/home">Home</a>
-        </li>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Togglenavigation">
+        <span class="navbar-toggler-icon"></span>
+
+  </button> -->
+
+
+
+      <ul class="inline navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/account">Account<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/sales">Sales</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/inventory">Inventory</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/order_forms">Order Forms</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/setting">Settings</a>
+          <a class="nav-link" href='/work_home'>Home</a>
         </li>
       </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/setting">Account<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/sales1">Sales</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class ="nav-item">
+          <a class = "nav-link" href = "http://localhost:3000/inventory" target = "_self">Inventory</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href="http://localhost:3000/order_forms">Order Forms</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href='/send_order'>Send Order</a>
+        </li>
+    </ul>
+
       <div class="form-inline my-2 my-lg-0">
-        <a href="login.html">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        <a href="/login">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
         </a>
       </div>
-    </div>
+
   </nav>
 
   <div class="container">
-    <br><br><br><br><br><br><br><br>
     <div class="center">
       <a href="home.html">
-      <img class="rounded-circle center" src="../resources/img/logo.jpg" alt="LOGO" width="248" height="90">
+      <img class="rounded-circle center" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="LOGO" width="248" height="90">
       </a>
       <hr>
       <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Options</button>
         <div id="myDropdown" class="dropdown-content">
           <a href="#">Change Password</a>
           <a href="#">Add items to menu</a>
@@ -269,11 +265,11 @@
           <input type="checkbox" onclick="showPassNewReentered()"> Show Password
         </div>
       </div>
-      <br><br>
+      <br><br><br><br>
       <input type="submit" value="Change Password" class="btn btn-primary btn-block">
     </form>
     <br>
-    <form action = "/updateMenu" method = "POST">  
+    <form action = "/updateMenu" method = "POST">
       <div class="form-group row textcenter">
         <label class="col-sm-2 col-form-label" for="menu"># of Menu Items: </label>
         <div class="col-sm-3">
@@ -284,138 +280,7 @@
         </div>
       </div>
       <div id="menuItem">
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label" >Dish Name: </label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" name="dishName" id="dishName" placeholder="e.g Chocolate Lava cake">
-          </div>
-          <label class=" col-form-label" >Dish Price: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="dishPrice" id="dishPrice" placeholder="e.g $8.99">
-          </div>
-        </div>
-        <div id="test">
-          <div class="form-group row">
-          <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="ingName1" id="ingName1" placeholder="e.g Nutella">
-          </div>
-          <label class="col-sm-1"> Amount: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingAmnt1" id="ingAmnt1" placeholder="e.g 3.5">
-          </div>
-          <label class="col-sm-1"> Cost: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingCost1" id="ingCost1" placeholder="e.g $0.9">
-          </div>
-          <select name="unit1" id="unit-select1">
-            <option value=""> Unit </option>
-            <option value="whole_item">Whole Item(s)</option>
-            <option value="lbs">lbs</option>
-            <option value="oz">Oz</option>
-            <option value="gallons">Gallons</option>
-            <option value="tb_spoon">tb spoon(s)</option>
-            <option value="fl_oz">Fl Oz</option>
-          </select>
-        </div>
-        <div id="test">
-          <div class="form-group row">
-          <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="ingName2" id="ingName2" placeholder="e.g Nutella">
-          </div>
-          <label class="col-sm-1"> Amount: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingAmnt2" id="ingAmnt2" placeholder="e.g 3.5">
-          </div>
-          <label class="col-sm-1"> Cost: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingCost2" id="ingCost2" placeholder="e.g $0.9">
-          </div>
-          <select name="unit2" id="unit-select2">
-            <option value=""> Unit </option>
-            <option value="whole_item">Whole Item(s)</option>
-            <option value="lbs">lbs</option>
-            <option value="oz">Oz</option>
-            <option value="gallons">Gallons</option>
-            <option value="tb_spoon">tb spoon(s)</option>
-            <option value="fl_oz">Fl Oz</option>
-          </select>
-        </div>
-        <div id="test">
-          <div class="form-group row">
-          <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="ingName3" id="ingName3" placeholder="e.g Nutella">
-          </div>
-          <label class="col-sm-1"> Amount: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingAmnt3" id="ingAmnt3" placeholder="e.g 3.5">
-          </div>
-          <label class="col-sm-1"> Cost: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingCost3" id="ingCost3" placeholder="e.g $0.9">
-          </div>
-          <select name="unit3" id="unit-select3">
-            <option value=""> Unit </option>
-            <option value="whole_item">Whole Item(s)</option>
-            <option value="lbs">lbs</option>
-            <option value="oz">Oz</option>
-            <option value="gallons">Gallons</option>
-            <option value="tb_spoon">tb spoon(s)</option>
-            <option value="fl_oz">Fl Oz</option>
-          </select>
-        </div>
-        <div id="test">
-          <div class="form-group row">
-          <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="ingName4" id="ingName4" placeholder="e.g Nutella">
-          </div>
-          <label class="col-sm-1"> Amount: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingAmnt4" id="ingAmnt4" placeholder="e.g 3.5">
-          </div>
-          <label class="col-sm-1"> Cost: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingCost4" id="ingCost4" placeholder="e.g $0.9">
-          </div>
-          <select name="unit4" id="unit-select4">
-            <option value=""> Unit </option>
-            <option value="whole_item">Whole Item(s)</option>
-            <option value="lbs">lbs</option>
-            <option value="oz">Oz</option>
-            <option value="gallons">Gallons</option>
-            <option value="tb_spoon">tb spoon(s)</option>
-            <option value="fl_oz">Fl Oz</option>
-          </select>
-        </div>
-        <div id="test">
-          <div class="form-group row">
-          <label class="col-sm-2 col-form-label"> Ingredient Name: </label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" name="ingName5" id="ingName5" placeholder="e.g Nutella">
-          </div>
-          <label class="col-sm-1"> Amount: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingAmnt5" id="ingAmnt5" placeholder="e.g 3.5">
-          </div>
-          <label class="col-sm-1"> Cost: </label>
-          <div class="col-sm-2">
-            <input type="number" class="form-control" name="ingCost5" id="ingCost5" placeholder="e.g $0.9">
-          </div>
-          <select name="unit5" id="unit-select5">
-            <option value=""> Unit </option>
-            <option value="whole_item">Whole Item(s)</option>
-            <option value="lbs">lbs</option>
-            <option value="oz">Oz</option>
-            <option value="gallons">Gallons</option>
-            <option value="tb_spoon">tb spoon(s)</option>
-            <option value="fl_oz">Fl Oz</option>
-          </select>
-        </div>
-        <input type="submit" value="Add menu" class="btn btn-primary btn-block">
-        <div>
+
       </div>
     </form>
   </div>
