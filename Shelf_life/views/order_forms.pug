@@ -9,29 +9,37 @@ html(lang='en', dir='ltr')
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css', integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS', crossorigin='anonymous')
     link(href='../resources/css/my_style.css', rel='stylesheet')
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      a.navbar-brand(href='/views/home.html')
-        img.rounded-circle(src='../resources/img/logo.jpg', alt='', width='90', height='40')
-      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarText', aria-controls='navbarText', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/views/home.html') Home
-          li.nav-item
-            a.nav-link(href='/views/account.html') Account
-          li.nav-item
-            a.nav-link(href='/views/sales.html') Sales
-          li.nav-item
-            a.nav-link(href='http://localhost:3000/inventory') Inventory
-          li.nav-item
-            a.nav-link(href='http://localhost:3000/order_forms') Order Forms
-          li.nav-item
-            a.nav-link(href='/views/setting') Order Forms
-        ul.navbar-nav.float-right
-          li.nav-item
-            a.nav-link(href='/login') Login
-    P Welcome to the Order Forms page. Please place your Order!!!
+
+    nav.navbar.navbar-default.navbar-expand-lg.navbar-dark.bg-dark
+      a.navbar-brand(href='/work_home')
+          img.rounded-circle(src='https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg' alt='hi' width='90' height='40')
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/work_home') Home
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/setting') Account
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/sales1') Sales
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/inventory') Inventory
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/order_forms') Order Forms
+      ul.inline.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/send_order') Send Order
+      .form-inline.my-2.my-lg-0
+        a(href='/login')
+          button.btn.btn-outline-light.my-2.my-sm-0(type='submit') Logout
+
+  div.container
+    br
+    br
+    h3 Reorder Inventory Below
+    br
     form(action='/order' method='post')
       | User Id:
       br
@@ -66,7 +74,8 @@ html(lang='en', dir='ltr')
       background-color: #4d94ff;
       color: white;
       }
-    p Inventory supplies: NORMAL
+    br
+    h4 Stocked Inventory
     table#IngredientTable
       tr
         th Ingredient ID
@@ -83,7 +92,7 @@ html(lang='en', dir='ltr')
       </br>
       </br>
       </br>
-    p Inventory supplies: LOW
+    h4 Low Inventory Items
     table#IngredientTable
       tr
         th Ingredient ID
@@ -96,4 +105,5 @@ html(lang='en', dir='ltr')
           td #{item2.ingredient_name}
           td #{item2.ingredient_quantity}
           td #{item2.ingredient_unit}
-
+    br
+    br
