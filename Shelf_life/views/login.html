@@ -7,34 +7,38 @@
   <meta name="description" content="">
   <title>Login</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link href="../resources/css/signin.css" rel="stylesheet">
+  <link href="/Users/haleyhartin/Documents/ShelfLife/resources/css/signin.css" rel="stylesheet">
 
 </head>
 
-<body class="center text-center">
-  <form class="form-signin" action="/auth" method="POST">
+<body class="center text-center" style="text-align:center">
+  <div class="container">
+
     <a href="home.html">
-      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="LOGO" width="248" height="90">
+      <img class="rounded-circle" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="LOGO" width="248" height="90">
     </a>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="User_Name" class="sr-only">User Name</label>
-    <input type="text" id="User_Name" class="form-control" placeholder="JohnDoe99" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
+    <form action="/auth" method="POST">
+
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="text" name="em" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
+      <label for="inputPassword"  class="sr-only">Password</label>
+      <input type="password" name="pw" id="inputPassword" class="form-control" placeholder="Password" required>
+
+      <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me |
       </label>
       <a href="">Forgot Password?</a>
-    </div>
-    <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+      </div>
+      <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
     </form>
-    <form class="" action="/reg" method="POST">
-      <button class="btn btn-lg btn-primary" type="submit">Register</button>
-    </form>
-    <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
-
+    <br>
+  <form action="/reg" form method="POST">
+    <button class="btn btn-lg btn-primary" type="submit" >Register</button>
+  </form>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</div>
 </body>
 
 </html>
-
