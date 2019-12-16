@@ -268,12 +268,123 @@ app.get('/send_order', function (req, res) {
              result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
              result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
              result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
-             result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[5].dish_name + '">');
+             result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
              result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
              result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
           }
+          if(results.length==9)
+          {
+             result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+             result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+             result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+             result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+             result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+             result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+             result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+             result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+             result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+           }
+           if(results.length==10)
+           {
+              result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+              result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+              result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+              result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+              result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+              result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+              result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+              result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+              result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+              result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+            }
+            if(results.length==11)
+            {
+               result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+               result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+               result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+               result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+               result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+               result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+               result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+               result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+               result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+               result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+               result = result.replace('<p hidden>11</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[10].dish_name + '" name="'+ results[10].dish_name + '">');
+
+             }
+             if(results.length==12)
+             {
+                result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+                result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+                result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+                result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+                result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+                result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+                result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+                result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+                result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+                result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+                result = result.replace('<p hidden>11</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[10].dish_name + '" name="'+ results[10].dish_name + '">');
+                result = result.replace('<p hidden>12</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[11].dish_name + '" name="'+ results[11].dish_name + '">');
+
+              }
+              if(results.length==13)
+              {
+                 result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+                 result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+                 result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+                 result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+                 result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+                 result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+                 result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+                 result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+                 result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+                 result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+                 result = result.replace('<p hidden>11</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[10].dish_name + '" name="'+ results[10].dish_name + '">');
+                 result = result.replace('<p hidden>12</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[11].dish_name + '" name="'+ results[11].dish_name + '">');
+                 result = result.replace('<p hidden>13</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[12].dish_name + '" name="'+ results[12].dish_name + '">');
+
+               }
+               if(results.length==14)
+               {
+                  result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+                  result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+                  result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+                  result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+                  result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+                  result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+                  result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+                  result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+                  result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+                  result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+                  result = result.replace('<p hidden>11</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[10].dish_name + '" name="'+ results[10].dish_name + '">');
+                  result = result.replace('<p hidden>12</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[11].dish_name + '" name="'+ results[11].dish_name + '">');
+                  result = result.replace('<p hidden>13</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[12].dish_name + '" name="'+ results[12].dish_name + '">');
+                  result = result.replace('<p hidden>14</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[13].dish_name + '" name="'+ results[13].dish_name + '">');
+
+                }
+                if(results.length==15)
+                {
+                   result = data.replace('<p hidden>1</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[0].dish_name + '" name="'+ results[0].dish_name + '">');
+                   result = result.replace('<p hidden>2</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[1].dish_name + '" name="'+ results[1].dish_name + '">');
+                   result = result.replace('<p hidden>3</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[2].dish_name + '" name="'+ results[2].dish_name + '">');
+                   result = result.replace('<p hidden>4</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[3].dish_name + '" name="'+ results[3].dish_name + '">');
+                   result = result.replace('<p hidden>5</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[4].dish_name + '" name="'+ results[4].dish_name + '">');
+                   result = result.replace('<p hidden>6</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[5].dish_name + '" name="'+ results[5].dish_name + '">');
+                   result = result.replace('<p hidden>7</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[6].dish_name + '" name="'+ results[6].dish_name + '">');
+                   result = result.replace('<p hidden>8</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[7].dish_name + '" name="'+ results[7].dish_name + '">');
+                   result = result.replace('<p hidden>9</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[8].dish_name + '" name="'+ results[8].dish_name + '">');
+                   result = result.replace('<p hidden>10</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[9].dish_name + '" name="'+ results[9].dish_name + '">');
+                   result = result.replace('<p hidden>11</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[10].dish_name + '" name="'+ results[10].dish_name + '">');
+                   result = result.replace('<p hidden>12</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[11].dish_name + '" name="'+ results[11].dish_name + '">');
+                   result = result.replace('<p hidden>13</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[12].dish_name + '" name="'+ results[12].dish_name + '">');
+                   result = result.replace('<p hidden>14</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[13].dish_name + '" name="'+ results[13].dish_name + '">');
+                   result = result.replace('<p hidden>15</p>', '<input type="submit" class="w3-btn myClass" style="width:100%" value="'+ results[14].dish_name + '" name="'+ results[14].dish_name + '">');
+
+                 }
+
           if(results.length==0){
-             result = result.replace('<p hidden>9</p>', 'No menu items to display');
+             result = data.replace('<p hidden>1</p>', 'No menu items to display');
           }
 
           result = result.replace('{{name}}', myname);
@@ -320,9 +431,10 @@ app.post('/menu', function (req, res) {
         get_ingredients='select ingredient_quanity, ingredient_id from dish_2_ingredients where dish_id=$1;';
         db.any(get_ingredients, dish_id)
             .then(function(results){
-                  set_inventory='UPDATE inventory SET ingredient_quantity=(SELECT ingredient_quantity FROM inventory WHERE ingredient_id=$1)-(SELECT ingredient_quanity FROM dish_2_ingredients WHERE dish_id=$2 and ingredient_id= $3) WHERE ingredient_id=$4;';
-                  for(i=0; i<results.length; i++){
-                  db.any(set_inventory, [results[i].ingredient_id, dish_id, results[i].ingredient_id, results[i].ingredient_id])
+                  console.log('num of ingredients', results.length)
+                  for(let i=0; i<results.length; i++){
+                    set_inventory='UPDATE inventory SET ingredient_quantity=(SELECT ingredient_quantity FROM inventory WHERE ingredient_id=$1)-(SELECT ingredient_quanity FROM dish_2_ingredients WHERE dish_id=$2 and ingredient_id= $3) WHERE ingredient_id=$4;';
+                      db.any(set_inventory, [results[i].ingredient_id, dish_id, results[i].ingredient_id, results[i].ingredient_id])
                       .then(function(results){
                         console.log('worked')
                       })
@@ -353,6 +465,7 @@ app.post('/menu', function (req, res) {
                      db.any(get_cost, dish_id)
                       .then(function(results){
                         cost=parseInt(results[0].dish_cost)
+                        console.log('cost', cost)
                         total=total+cost;
                         console.log('total in menu', total)
                         var money = result.replace('0 ', JSON.stringify(total));
@@ -410,37 +523,42 @@ app.get('/work_home', function(req, res) {
     timedata=[];
     chartData=[];
     xaxis='Hour';
-    var i=1;
-    while(i<=t){
-       x=i;
-       get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2;';
-       var sum = db.any(get, [n, i])
+    // var i=1;
+    var x=0;
+    for(let i=0; i<=t; i++)
+    {
+       get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)=$3;';
+       var sum = db.any(get, [n, i,month])
        .then(function(results){
          if (results[0].sum==null){
-              return 0
+              // return 0
+              chartData.push(0);
             }
-          return results[0].sum
+        else {
+
+            chartData.push(results[0].sum);
+          }
+          // return results[0].sum
        })
       .catch(function(err){
           console.log("error",err);
        })
 
 
-     sum.then(function(result) {
-       console.log('i', i)
-      chartData.push(result);
-     })
-     .catch(function(err){
-         console.log("error",err);
-      })
+     // sum.then(function(result) {
+     //   console.log('i', i)
+     //  chartData.push(result);
+     // })
+     // .catch(function(err){
+     //     console.log("error",err);
+     //  })
     if(i>12)
     {
       x=i-12;
     }
     timedata.push(x);
-    i=i+1
+    x=x+1;
     }
-    i=1;
     sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2';
       db.any(sale, [n, month])
         .then(function(results){
@@ -509,7 +627,7 @@ app.get('/today', function(req, res) {
       x=i;
       // for(var i=1; j=t, i<j; i++){
          get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)= $3';
-         var sum = db.any(get, [n, i, '12'])
+         var sum = db.any(get, [n, i, month])
          .then(function(results){
             if (results[0].sum==null){
                  return 0;
@@ -538,7 +656,7 @@ app.get('/today', function(req, res) {
       }
       i=0;
       var sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
-      db.any(sale, [n,'12'])
+      db.any(sale, [n,month])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -564,7 +682,7 @@ app.get('/week', function(req, res) {
     xaxis='Day';
     title= 'Weekly Sales';
       for(i=6; i>=0; i--){
-         get = 'select sum(cost) from sales where extract(day from date)= $1;';
+         get = 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)=$2;';
          if(n-i<=0)
          {
            x=30-(i-n);
@@ -573,7 +691,7 @@ app.get('/week', function(req, res) {
            x=n-i;
          }
          //console.log('week day', x)
-         var sum = db.any(get, x)
+         var sum = db.any(get, [x,month])
          .then(function(results){
            //console.log('day: ', stamp-i);
             if (results[0].sum==null){
@@ -599,7 +717,7 @@ app.get('/week', function(req, res) {
       }
       console.log('chart data: ', chartData)
       sale= 'select sum(cost) from sales where (extract(day from date)= $1 or extract(day from date)= $2 or extract(day from date)= $3 or extract(day from date)= $4 or extract(day from date)= $5 or extract(day from date)= $6 or extract(day from date)= $7) and extract(month from date)= $8;';
-      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6,'12'])
+      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6, month])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -626,8 +744,8 @@ summ=0;
 xaxis='Day';
 title= 'Monthly Sales';
   for(var i=1; i<=n; i++){
-     get = 'select sum(cost) from sales where extract(day from date)= $1;';
-     db.any(get, i)
+     get = 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)=$2;';
+     db.any(get, [i, month])
      .then(function(results){
         if (results[0].sum==null){
              summ=0;
@@ -647,7 +765,7 @@ title= 'Monthly Sales';
     timedata.push(i);
   }
   sale= 'select sum(cost) from sales where extract(month from date)= $1;';
-  db.any(sale, '12')
+  db.any(sale, month)
     .then(function(results){
       if (results[0].sum==null){
            salesdata=0;
@@ -664,7 +782,7 @@ res.redirect('/sales');
 
 app.get('/year', function(req, res) {
 var x;
-
+console.log('year', year)
 stamp = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss');
 console.log(stamp);
 timedata=[];
@@ -705,7 +823,7 @@ while(i<12)
   }
 i=0;
   var sale= 'select sum(cost) from sales where extract(year from date)= $1;';
-  db.any(sale, '2019')
+  db.any(sale, '2019' )
     .then(function(results){
       if (results[0].sum==null){
            salesdata=0;
@@ -786,7 +904,7 @@ app.get('/sales', function(req, res){
 // 	response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/account.html')
 // });
 app.get('/setting', function(request, response) {
-    response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/settings.html')
+    response.sendFile('/Users/haleyhartin/Documents/ShelfLife/views/settings1.html')
 });
 
 
@@ -822,44 +940,50 @@ app.post('/updateMenu', function(request, response) {
     var ingredientName = request.body.ingName;
     var ingredientQuanity = request.body.ingAmnt;
     var ingredientCost = request.body.ingCost;
+    var numing= request.body.numIngredients;
     var unit = request.body.pets;
     var numIngredients;
     console.log(unit)
     var ingredientID;
     var numdishes;
+
     var count = 'select * from dishes;';
         db.any(count)
           .then(function(results){
             numdishes=results.length + 1;
             var sql = 'insert into dishes(dish_id, dish_name, dish_cost) values($1, $2, $3);';
-            db.any(sql, [numdishes, dishName, dishPrice])
+            db.any(sql, [numdishes, dishName, parseInt(dishPrice)])
             .then(function(results){
-        //for loop for numIngredients
-          //replace ingredientName with ingredientName[i]
+        // for loop for numIngredients
+        //   replace ingredientName with ingredientName[i]
+               for(let i=0; i<numing; i++)
+               {
                   console.log('inserted into dishes');;
-                  var x='select * from inventory where ingredient_name=$1;';
-                  db.any(x, ingredientName)
+                  var x='select * from inventory where ingredient_name= $1;';
+                  db.any(x, ingredientName[i])
                   .then(function(results){
                     if(results.length==0)
                     {
+                      console.log('i', i)
                       console.log('new ingredient')
-                      console.log('quantity', typeof ingredientQuanity)
-                      console.log('price', typeof ingredientCost)
-                      console.log('unit', typeof unit)
-                      console.log('name', typeof ingredientName)
+                      console.log('quantity', ingredientQuanity[i])
+                      console.log('price', ingredientCost[i])
+                      console.log('unit', unit[i])
+                      console.log('name', ingredientName[i])
                       var j= 'select * from inventory;';
                       db.any(j)
                     	  .then(function(results){
-                          var id= results.length + 1;
+                          var id= results.length + (i+1);
+                          console.log('id', id)
                           console.log('id', id)
                           var sql3 = 'insert into inventory(ingredient_id, ingredient_group_id, ingredient_name, ingredient_quantity, ingredient_cost, ingredient_unit) values ($1, $2, $3, $4, $5, $6);';
-                    	    db.any(sql3, [parseInt(id), 1, ingredientName, parseInt(ingredientQuanity), parseInt(ingredientCost), parseInt(unit)])
+                    	    db.any(sql3, [parseInt(id), 1, ingredientName[i], 0, parseInt(ingredientCost[i]), unit[i]])
                     	     .then(function(results){
                     	  	     console.log("inserted new ingredient");
                                var sql2 = 'insert into dish_2_ingredients(dish_id, ingredient_id, ingredient_quanity) values ($1, $2, $3);';
-                                 db.any(sql2, [numdishes, id, ingredientQuanity])
+                                 db.any(sql2, [numdishes, id, ingredientQuanity[i]])
                                  	 .then(function(results){
-                                 	  	console.log("Inserted into dish to ingredients");
+                                 	  	console.log("Inserted new into dish to ingredients id", id);
                                  	  })
                                  	   .catch(function(err){
                                  	    	console.log("error", err);
@@ -878,25 +1002,27 @@ app.post('/updateMenu', function(request, response) {
                   {
                     console.log('old ingredient')
                     var id = 'select ingredient_id from inventory where ingredient_name = $1;';
-                    db.any(id, ingredientName)
+                    db.any(id, ingredientName[i])
                     .then(function(results){
                       ingredientID=results[0].ingredient_id;
                       var sql2 = 'insert into dish_2_ingredients(dish_id, ingredient_id, ingredient_quanity) values ($1, $2, $3);';
-                        db.any(sql2, [numdishes, ingredientID, ingredientQuanity])
+                        db.any(sql2, [numdishes, ingredientID, ingredientQuanity[i]])
                         	 .then(function(results){
-                        	  	console.log("Inserted into dish to ingredients");
+                        	  	console.log("Inserted old into dish to ingredients id", ingredientID);
                         	  })
                         	   .catch(function(err){
                         	    	console.log("error, err");
                         	  })
                      })
-                  }
 
+
+                }
             })
             .catch(function(err){
               console.log("error",err);
              })
-          })
+           }
+           })
           .catch(function(err){
             console.log("error",err);
           })
