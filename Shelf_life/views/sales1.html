@@ -14,53 +14,68 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="home.html">
-      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href='/work_home'>
+      <img class="rounded-circle" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="hi" width="90" height="40">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/work_home">Home</a>
-        </li>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Togglenavigation">
+        <span class="navbar-toggler-icon"></span>
+
+  </button> -->
+
+
+
+      <ul class="inline navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="restaurant.html">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/sales1">Sales<span class="sr-only">(current)</span></a>
-        </li>
-        <li>
-          <a class="nav-link" href="inventory.html">Inventory</a>
-        </li>
-        <li>
-          <a class="nav-link" href="order_forms.html">Order Forms</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/send_order">Order</a>
+          <a class="nav-link" href='/work_home'>Home</a>
         </li>
       </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/setting">Account<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/sales1">Sales</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class ="nav-item">
+          <a class = "nav-link" href = "http://localhost:3000/inventory" target = "_self">Inventory</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href="http://localhost:3000/order_forms">Order Forms</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href='/send_order'>Send Order</a>
+        </li>
+    </ul>
+
       <div class="form-inline my-2 my-lg-0">
-        <a href="login.html">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        <a href="/login">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
         </a>
       </div>
-    </div>
+
   </nav>
   <br>
-  <div class="container">
-    <div class="jumbotron" style="background-color:#90EE90">
+  <div class = "bottom">
+    <div class="jumbotron" align = "center">
+      <h1>View {{name}}'s Past Sales</h1>
+      <div class="container">
         <div class="clearfix">
-          <h2 class="jumbotron" align="center" style="background-color:#B0C4DE"> Todays Sales: {{sales}}</h2>
+          <h2 class="jumbotron" align="center" style="background-color:#009999"> Todays Sales: ${{sales}}</h2>
           <br>
-          <h2 class="jumbotron" align="center" style="background-color:#B0C4DE"> Total Sales: {{totalsales}}</h2>
+          <h2 class="jumbotron" align="center" style="background-color:#009999"> Total Sales: ${{totalsales}}</h2>
         </div>
       <br>
       <div align="center">
-        <h3> View Sales:</h3>
-        <br>
+        <h5> View Sales:</h5>
         <form id="table" action="/table" method="POST">
           <select class="selectpicker" data-style="btn-info" name="selectpicker">
             <optgroup label="Sales">
@@ -76,4 +91,5 @@
       </div>
     </div>
   </div>
+</div>
 </body>
