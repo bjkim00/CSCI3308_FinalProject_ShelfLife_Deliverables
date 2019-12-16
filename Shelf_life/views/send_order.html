@@ -12,57 +12,80 @@
   <link href="../resources/css/my_styles.css" rel="stylesheet">
   <script src="https://cdn.rawgit.com/jprichardson/string.js/master/dist/string.min.js"></script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<style>
+  .myClass{
+    font-size: 20px;
+    background: #1a53ff;
+    color: #ffffff;
+
+    /* text-shadow: 3px 2px 1px #9daef5;  -webkit-box-shadow: 6px 5px 24px #666666;  -moz-box-shadow: 6px 5px 24px #666666;  box-shadow: 6px 5px 24px #666666; */
+}
+
+
+</style>
 </head>
 <body>
-<form id="navbar" action="/nav" method ="POST">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="home.html">
-      <img class="rounded-circle" src="../resources/img/logo.jpg" alt="" width="90" height="40">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href='/work_home'>
+      <img class="rounded-circle" src="https://www.amnh.org/var/ezflow_site/storage/images/media/amnh/shelf-life/shelf-life-logo-black-text_white-bg/1569498-3-eng-US/shelf-life-logo-black-text_white-bg.jpg" alt="hi" width="90" height="40">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/work_home" >Home</a>
-        </li>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Togglenavigation">
+        <span class="navbar-toggler-icon"></span>
+
+  </button> -->
+
+
+
+      <ul class="inline navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" name="account">Account<span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  name="sales" href="/today">Sales</a>
-        </li>
-        <li>
-          <a class="nav-link" name="inventory">Inventory</a>
-        </li>
-        <li>
-          <a class="nav-link" name="Order Form">Order Forms</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/send_order">Order</a>
+          <a class="nav-link" href='/work_home'>Home</a>
         </li>
       </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/setting">Account<span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/sales1">Sales</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li class ="nav-item">
+          <a class = "nav-link" href = "http://localhost:3000/inventory" target = "_self">Inventory</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href="http://localhost:3000/order_forms">Order Forms</a>
+        </li>
+    </ul>
+    <ul class="inline navbar-nav mr-auto">
+        <li>
+          <a class="nav-link" href='/send_order'>Send Order</a>
+        </li>
+    </ul>
+
       <div class="form-inline my-2 my-lg-0">
-        <a href="login.html">
-          <button class="btn btn-outline-light my-2 my-sm-0" name="login" type="submit">Login</button>
+        <a href="/login">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
         </a>
       </div>
-    </div>
+
   </nav>
-</form>
 
         <div class="bottom">
-          <div class="col-15">
-            <div class="jumbotron">
+           <div class="jumbotron">
+             <center><h1 class="center text">{{name}}'s Menu</h1></center>
+          </div>
 
-          <h1 class="display-4">Menu</h1>
 
-
+<div class="container">
 
           <br>
-      </div>
-
+     <div class="w3-show-inline-block">
+       <div class="w3-bar myClass">
        <form id="menu" action="/menu" method ="POST">
 
           <p hidden>1</p>
@@ -74,12 +97,18 @@
           <p hidden>7</p>
           <p hidden>8</p>
           <p hidden>9</p>
-
-
+          <p hidden>10</p>
+          <p hidden>11</p>
+          <p hidden>12</p>
+          <p hidden>13</p>
+          <p hidden>14</p>
+          <p hidden>15</p>
+          <p hidden>16</p>
         </form>
+     </div>
+   </div>
 
-
-
+        <br>
         <h5>Order Total: 0 </h5>
         <br>
         <form id="submit" action="/submit" method ="GET">
@@ -95,8 +124,8 @@
 
 
             </div>
-          </div>
-        </div>
 
+
+  </div>
   </body>
 </html>
