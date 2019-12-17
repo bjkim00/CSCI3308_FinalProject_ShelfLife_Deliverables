@@ -26,7 +26,7 @@ var S = require('string');
 const dbConfig={
 	host: 'localhost',
 	port: 5431,  //probably 5432 for you
-	database: 'shalflife2',   //enter in your username password for pg
+	database: 'shelflife',   //enter in your username password for pg
 	user: 'haleyhartin',
 	password:'abc123'
 };
@@ -528,7 +528,7 @@ app.get('/work_home', function(req, res) {
     for(let i=0; i<=t; i++)
     {
        get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)=$3;';
-       var sum = db.any(get, [n, i,month])
+       var sum = db.any(get, [n, i, month])
        .then(function(results){
          if (results[0].sum==null){
               // return 0
@@ -627,7 +627,7 @@ app.get('/today', function(req, res) {
       x=i;
       // for(var i=1; j=t, i<j; i++){
          get = 'select SUM(cost) from sales where extract(day from date)= $1 and extract(hours from date)= $2 and extract(month from date)= $3';
-         var sum = db.any(get, [n, i, month])
+         var sum = db.any(get, [n, i, '12'])
          .then(function(results){
             if (results[0].sum==null){
                  return 0;
@@ -656,7 +656,7 @@ app.get('/today', function(req, res) {
       }
       i=0;
       var sale= 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)= $2;';
-      db.any(sale, [n,month])
+      db.any(sale, [n,'12'])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -691,7 +691,7 @@ app.get('/week', function(req, res) {
            x=n-i;
          }
          //console.log('week day', x)
-         var sum = db.any(get, [x,month])
+         var sum = db.any(get, [x, '12'])
          .then(function(results){
            //console.log('day: ', stamp-i);
             if (results[0].sum==null){
@@ -717,7 +717,7 @@ app.get('/week', function(req, res) {
       }
       console.log('chart data: ', chartData)
       sale= 'select sum(cost) from sales where (extract(day from date)= $1 or extract(day from date)= $2 or extract(day from date)= $3 or extract(day from date)= $4 or extract(day from date)= $5 or extract(day from date)= $6 or extract(day from date)= $7) and extract(month from date)= $8;';
-      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6, month])
+      db.any(sale, [n,n-1,n-2,n-3,n-4,n-5,n-6, '12'])
         .then(function(results){
           if (results[0].sum==null){
                salesdata=0;
@@ -745,7 +745,7 @@ xaxis='Day';
 title= 'Monthly Sales';
   for(var i=1; i<=n; i++){
      get = 'select sum(cost) from sales where extract(day from date)= $1 and extract(month from date)=$2;';
-     db.any(get, [i, month])
+     db.any(get, [i, '12'])
      .then(function(results){
         if (results[0].sum==null){
              summ=0;
@@ -765,7 +765,7 @@ title= 'Monthly Sales';
     timedata.push(i);
   }
   sale= 'select sum(cost) from sales where extract(month from date)= $1;';
-  db.any(sale, month)
+  db.any(sale, '12')
     .then(function(results){
       if (results[0].sum==null){
            salesdata=0;
