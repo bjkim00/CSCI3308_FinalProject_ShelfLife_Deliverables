@@ -5,10 +5,10 @@
    
    In order to run the program, first download the files. Using the shelflifeDBv6.txt file, create the database by copying and pasting the code into a new postgres template. In the index.js and queries.js file, change the dbconfig database, username and password to your database name, username and password. 
    
-   Please note, we had trouble uploading our project to Heroku due to the multiple different languages used. While you can download the code on your own computer to run it, you will have to change the file directories redirecting to diffrenet pages to match the structure of your computer. For your convience, we have uploaded two video demos of our website. One is a current user creating an account, the other is a previous user who has past sales we can view. 
+   Please note, we had trouble uploading our project to Heroku due to the multiple different languages used. While you can download the code on your own computer to run it, you will have to change the file directories redirecting to diffrenet pages to match the structure of your computer. For your convience, we have uploaded two video demos in the main project folder of our website. One is a new user creating an account(new_user.mov), the other is a previous user who has past sales we can view(previous_user.mov). 
    
-   previous_user.mov
+  
    
-   new_user.mov
+   
 
 
