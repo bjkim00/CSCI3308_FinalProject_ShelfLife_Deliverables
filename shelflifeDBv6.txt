@@ -12,7 +12,7 @@ Phone VARCHAR(50),
 Address_line_1 VARCHAR(50),
 Address_line_2 VARCHAR(50)  
 User_Name VARCHAR(50),
-User_Password VARCHAR(50),                                                     
+User_Password VARCHAR(50)                                                    
 );
 
 CREATE TABLE DISHES(
