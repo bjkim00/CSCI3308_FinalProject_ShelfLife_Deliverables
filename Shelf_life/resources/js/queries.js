@@ -18,7 +18,7 @@ const createUser = (request, response) => {
     if (error) {
       throw error
     }
-    response.redirect('/work_home');
+    response.redirect('/login');
     //response.end();
   })
 }
