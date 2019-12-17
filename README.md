@@ -8,6 +8,7 @@
    Please note, we had trouble uploading our project to Heroku due to the multiple different languages used. While you can download the code on your own computer to run it, you will have to change the file directories redirecting to diffrenet pages to match the structure of your computer. For your convience, we have uploaded two video demos of our website. One is a current user creating an account, the other is a previous user who has past sales we can view. 
    
    previous_user.mov
+   
    new_user.mov
 
 
