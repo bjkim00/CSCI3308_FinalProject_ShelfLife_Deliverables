@@ -4,4 +4,7 @@
    The structure of the respitory is the ShelfLife_Deliverables folder which holds the code to create the database and the Shelf_Life folder containing the projects code. In the Shelf_Life folder, is a resources and views folder. The resources folder holds the css folder which stores the code for the styling of the html files. The resouces folder also hold the js folder which containes our node.js files, index.js and queries.js. The views folder holds each of out html and pug pages. 
    
    In order to run the program, first download the files. Using the shelflifeDBv6.txt file, create the database by copying and pasting the code into a new postgres template. In the index.js and queries.js file, change the dbconfig database, username and password to your database name, username and password. 
+   
+   Please note, we had trouble uploading our project to Heroku due to the multiple different languages used. While you can download the code on your own computer to run it, you will have to change the file directories redirecting to diffrenet pages to match the structure of your computer. For your convience, we have uploaded two video demos of our website. One is a current user creating an account, the other is a previous user who has past sales we can view. 
+
 
